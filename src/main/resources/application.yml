@@ -1,19 +1,21 @@
 spring:
   profiles.active: dev
   datasource:
-    username: root
-    password: jiny
+    username: CaoJinYan
+    password: Csilen25*9
   redis:
     host: 59.110.55.133
     password: jiny
 logging.level:
   root: info
-  im.silen.vueboot.mappers: trace
+  im.silen.vueboot.mapper: debug
 ---
 spring:
+
   profiles: dev
   datasource:
-    url: jdbc:mysql://localhost:3306/db_example?serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://59.110.55.133:3306/VueBoot #?serverTimezone=Asia/Shanghai
+
 ---
 spring:
   profiles: prod

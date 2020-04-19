@@ -23,19 +23,27 @@
         </tr>
       </tbody>
     </table>
+    <Test/>
+    <RouterView/>
   </div>
 </template>
 
 <script>
 import { set, get } from '@utils/localStorageUtil';
+import Test from "./views/test";
+
+
 export default {
   data() {
     return {
       item: {
         date:new Date().toJSON()
       },
-      list: get('list')
+      list: get('list') || []
     };
+  },
+  components:{
+    Test
   },
   methods: {
     handleClick() {
@@ -47,9 +55,6 @@ export default {
     }
   },
   created() {
-    this.$http.get('/cities/CA').then(res=>{
-      console.log(res.data);
-    })
   }
 };
 </script>
