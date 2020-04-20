@@ -12,7 +12,6 @@ public class VueBootApplication {
 //        return "login";
 //    }
     public static void main(String[] args) {
-
         SpringApplication.run(VueBootApplication.class, args);
     }
 

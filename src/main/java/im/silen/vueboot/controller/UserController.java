@@ -13,6 +13,10 @@ public class UserController {
         this.userService = userService;
     }
 
+    @GetMapping("/login")
+    public String login(){
+        return "未登录";
+    }
     @GetMapping("/user/add")
     public String add(@RequestParam String name) {
 

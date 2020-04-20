@@ -1,23 +1,18 @@
 spring:
   profiles.active: dev
   datasource:
+    url: jdbc:mysql://${ALIYUN_ECS_IP:localhost}:3306/VueBoot #?serverTimezone=Asia/Shanghai
     username: CaoJinYan
-    password: Csilen25*9
   redis:
-    host: 59.110.55.133
-    password: jiny
+    host: ${ALIYUN_ECS_IP:localhost}
 logging.level:
   root: info
-  im.silen.vueboot.mapper: debug
+  im.silen.vueboot.mapper: trace
+
 ---
 spring:
-
   profiles: dev
-  datasource:
-    url: jdbc:mysql://59.110.55.133:3306/VueBoot #?serverTimezone=Asia/Shanghai
 
 ---
 spring:
   profiles: prod
-  datasource:
-    url: jdbc:mysql://localhost:3307/db_example?serverTimezone=Asia/Shanghai
