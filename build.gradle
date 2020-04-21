@@ -16,7 +16,7 @@ configurations {
 }
 
 repositories {
-    maven {url "https://maven.aliyun.com/repository/central"}
+    mavenCentral(/*url: 'https://maven.aliyun.com/repository/central'*/)
 }
 
 dependencies {
@@ -34,4 +34,12 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+
+task showRepositories {
+    doLast {
+        repositories.each {
+            println "repository: ${it.name} ('${it.url}')"
+        }
+    }
 }
