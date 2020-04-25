@@ -16,7 +16,7 @@ configurations {
 }
 
 repositories {
-    mavenCentral(/*url: 'https://maven.aliyun.com/repository/central'*/)
+    mavenCentral(name: 'aliyun', url: 'https://maven.aliyun.com/repository/central')
 }
 
 dependencies {

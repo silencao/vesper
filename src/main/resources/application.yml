@@ -1,10 +1,5 @@
 spring:
   profiles.active: dev
-  datasource:
-    url: jdbc:mysql://${ALIYUN_ECS_IP:localhost}:3306/VueBoot #?serverTimezone=Asia/Shanghai
-    username: CaoJinYan
-  redis:
-    host: ${ALIYUN_ECS_IP:localhost}
 logging.level:
   root: info
   im.silen.vueboot.mapper: trace

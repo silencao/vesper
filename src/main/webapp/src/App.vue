@@ -1,9 +1,11 @@
 <template>
   <div id="app">
-    <label>level
+    <label>
+      level
       <input type="text" v-model="item.level" />
     </label>
-    <label>sum
+    <label
+      >sum
       <input type="text" v-model="item.sum" />
     </label>
     <button type="button" @click="handleClick">添加</button>
@@ -16,45 +18,43 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="obj in list" :key="obj.level">
+        <tr v-for="obj in list" :key="obj.sum">
           <td>{{ obj.level }}</td>
           <td>{{ obj.sum }}</td>
           <td>{{ obj.date }}</td>
         </tr>
       </tbody>
     </table>
-    <Test/>
-    <RouterView/>
+    <RouterView />
   </div>
 </template>
 
 <script>
 import { set, get } from '@utils/localStorageUtil';
-import Test from "./views/test";
-
 
 export default {
   data() {
     return {
       item: {
-        date:new Date().toJSON()
+        date: new Date().toJSON()
       },
       list: get('list') || []
     };
   },
-  components:{
-    Test
-  },
+  components: {},
   methods: {
     handleClick() {
       this.list.push(this.item);
-      this.item={
-        date:new Date().toJSON()
-      }
+      this.item = {
+        date: new Date().toJSON()
+      };
       set('list', this.list);
     }
   },
   created() {
+    this.$http.get('/api/growth').then(res => {
+      console.log(res);
+    });
   }
 };
 </script>
