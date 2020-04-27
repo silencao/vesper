@@ -9,6 +9,7 @@ public class VueBootApplication {
 //    private String index(){
 //        return "login";
 //    }
+
     public static void main(String[] args) {
         SpringApplication.run(VueBootApplication.class, args);
     }

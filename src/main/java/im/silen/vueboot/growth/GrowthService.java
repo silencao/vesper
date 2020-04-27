@@ -1,5 +1,6 @@
 package im.silen.vueboot.growth;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +14,7 @@ public class GrowthService {
 
     private final StringRedisTemplate redisTemplate;
 
-    public GrowthService(StringRedisTemplate redisTemplate) {
+    public GrowthService(StringRedisTemplate redisTemplate, ObjectMapper objectMapper) {
         this.redisTemplate = redisTemplate;
     }
 
