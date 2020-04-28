@@ -2,7 +2,7 @@
   <div id="app">
     <label>
       level
-      <input type="text" v-model="item.level" />
+      <input type="number" v-model.number="item.level" />
     </label>
     <label
       >sum

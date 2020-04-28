@@ -1,39 +1,51 @@
 package im.silen.vueboot.growth;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-
 import java.time.LocalDate;
-import java.util.Date;
 
 public class Growth {
-    private final String    sum;
-    @JsonFormat(pattern = "yyyy--MM--dd")
-    @JsonSerialize()
-    private final LocalDate date;
-    private final int       level;
-    private final Date oldDate;
+    private String    sum;
+    private LocalDate date;
+    private int       level;
 
-    public Growth(String sum, LocalDate date, int level, Date oldDate) {
+    public Growth() {
+    }
+
+    public Growth(String sum, LocalDate date, int level) {
         this.sum = sum;
         this.date = date;
         this.level = level;
-        this.oldDate = oldDate;
     }
 
     public String getSum() {
         return sum;
     }
 
+    public void setSum(String sum) {
+        this.sum = sum;
+    }
+
     public LocalDate getDate() {
         return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
     public int getLevel() {
         return level;
     }
 
-    public Date getOldDate() {
-        return oldDate;
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    @Override
+    public String toString() {
+        return "Growth{" +
+                "sum='" + sum + '\'' +
+                ", date=" + date +
+                ", level=" + level +
+                '}';
     }
 }
