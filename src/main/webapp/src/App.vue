@@ -6,7 +6,7 @@
     </label>
     <label
       >sum
-      <input type="text" v-model="item.sum" />
+      <input type="text" v-model="item.sum"/>
     </label>
     <button type="button" @click="handleClick">添加</button>
     <table>
