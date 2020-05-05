@@ -52,9 +52,13 @@ export default {
     }
   },
   created() {
-    this.$http.get('/api/growth').then(res => {
+    this.$http.get('/growth').then(res => {
       console.log(res);
     });
+    this.$http.post('/growth', {
+      test: 'ccc'
+    })
+    this.$http.put('/growth')
   }
 };
 </script>

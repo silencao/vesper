@@ -35,14 +35,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .mvcMatchers(HttpMethod.PUT).authenticated()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin(/*httpSecurityFormLoginConfigurer -> httpSecurityFormLoginConfigurer
                         .usernameParameter("username")
                         .passwordParameter("password")
                         .loginProcessingUrl("/login/process")
-                        .loginPage("/login1")*/)/*.loginProcessingUrl("/l1")*/
+                        .loginPage("/login1")*/)/*.loginPage("/#/login")*/
                 .and().httpBasic();
 
     }

@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/growth")
+@RequestMapping("/growth")
 public class GrowthController {
     GrowthService growthService;
 
@@ -26,8 +26,7 @@ public class GrowthController {
     }
 
     @GetMapping
-    public List<String> search() {
-       return growthService.search("jinyan");
+    public List<Growth> search() {
+       return growthService.search("test");
     }
-
 }
