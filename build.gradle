@@ -36,10 +36,6 @@ test {
     useJUnitPlatform()
 }
 
-//tasks.withType(JavaCompile) {
-//    options.encoding('utf-8')
-//}
-
 task showRepositories {
     doLast {
         println "仓库列表如下："
