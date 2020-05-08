@@ -10,6 +10,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.security.web.csrf.CsrfTokenRepository;
 
 import javax.sql.DataSource;
 
@@ -34,7 +36,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable()
+        http.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).and()
                 .authorizeRequests()
                 .antMatchers(HttpMethod.GET, "/index*").permitAll()
                 .anyRequest().authenticated()
@@ -44,11 +46,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         .passwordParameter("password")
                         .loginProcessingUrl("/login/process")
                         .loginPage("/login1")*/)/*.loginPage("/#/login")*/
-        .and().addFilterAt((request, response, chain) -> {
-chain.doFilter(request,response);
+                .and().addFilterAt((request, response, chain) -> {
+            chain.doFilter(request, response);
         }, UsernamePasswordAuthenticationFilter.class)
         ;
-
     }
 
     @Override
