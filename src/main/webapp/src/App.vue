@@ -25,6 +25,7 @@
         </tr>
       </tbody>
     </table>
+    <div>{{text}}</div>
     <RouterView />
   </div>
 </template>
@@ -38,12 +39,14 @@ export default {
       item: {
         date: new Date().toJSON()
       },
-      list: get('list') || []
+      list: get('list') || [],
+      text:''
     };
   },
   components: {},
   methods: {
     handleClick() {
+      this.text = JSON.stringify(this.item);
       this.list.push(this.item);
       this.item = {
         date: new Date().toJSON()
@@ -55,10 +58,10 @@ export default {
     this.$http.get('/growth').then(res => {
       console.log(res);
     });
-    this.$http.post('/growth', {
+    this.$http.post('/growth/test', {
       test: 'ccc'
     })
-    this.$http.put('/growth')
+    this.$http.put('/growth/test')
   }
 };
 </script>

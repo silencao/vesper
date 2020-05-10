@@ -1,9 +1,11 @@
 function splitAndCast(numStr: string): number[] {
-    const strings: string[] = numStr.split(/(?<=\d)(?=[a-z]+)/);
+    const strings: string[] = numStr.match(/(\d+\.?\d?)|[a-z]+/g) || [];
 
     return [
         Number(strings[0]),
-        Array.from(strings.length > 1 ? strings[1] : '').reverse().reduce((acc, str, idx) => acc + Math.pow(26, idx) * (str.charCodeAt(0) - 96), 0)
+        strings.length > 1
+            ? Array.from(strings[1]).reverse().reduce((acc, str, idx) => acc + Math.pow(26, idx) * (str.charCodeAt(0) - 96), 0)
+            : 0
     ]
 }
 
@@ -37,6 +39,7 @@ assert('1', '800', 800)
 assert('500', '1a', 2)
 assert('1a', '2a', 3)
 log([
+    '0.1 -> 2',
     '1a -> 200a',
     '500 -> 2b',
     '800zz -> 1aaa'

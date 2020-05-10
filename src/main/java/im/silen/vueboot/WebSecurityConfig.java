@@ -38,6 +38,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).and()
                 .authorizeRequests()
+//                .antMatchers(HttpMethod.POST, "/growth").permitAll()
                 .antMatchers(HttpMethod.GET, "/index*").permitAll()
                 .anyRequest().authenticated()
                 .and()
