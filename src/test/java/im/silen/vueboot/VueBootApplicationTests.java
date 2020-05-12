@@ -3,6 +3,7 @@ package im.silen.vueboot;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.type.TypeFactory;
 import im.silen.vueboot.growth.Growth;
 import im.silen.vueboot.util.JSONArray;
 import org.junit.jupiter.api.Test;
@@ -44,9 +45,9 @@ class VueBootApplicationTests {
 
     @Test
     void contextLoads() throws IOException {
+        TypeFactory typeFactory = mapper.getTypeFactory();
 
-        mapper.readValue(resource.getFile(), new TypeReference<List<HashMap<String, String>>>() {
-        }).stream()
+        mapper.<List<HashMap<String, String>>>readValue(resource.getFile(), typeFactory.constructCollectionType(List.class, typeFactory.constructMapType(HashMap.class, String.class, String.class))).stream()
                 .sorted(Comparator.comparing(o -> ZonedDateTime.parse(o.get("date"))))
                 .peek(map -> System.out.println(ZonedDateTime.parse(map.get("date")).withZoneSameInstant(ZoneId.systemDefault())))
                 .map(o -> new Growth(o.get("sum"), ZonedDateTime.parse(o.get("date")).withZoneSameInstant(ZoneId.systemDefault()).toLocalDateTime().toLocalDate(), Integer.parseInt(o.get("level"))))
