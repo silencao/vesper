@@ -1,8 +1,14 @@
 package im.silen.vueboot.growth;
 
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/growth")
@@ -14,7 +20,14 @@ public class GrowthController {
     }
 
     @PostMapping("/{username}")
-    public void create(@PathVariable String username) {
+    public Growth create(
+            @RequestParam Optional<Integer> rp,
+            @RequestBody Growth growth,
+            @RequestHeader("X-XSRF-TOKEN") String token,
+            @CookieValue("JSESSIONID") String cookie,
+            @PathVariable String username) {
+        growth.setDate(LocalDate.now());
+        return growth;
     }
 
     @DeleteMapping("/{username}")
@@ -22,11 +35,11 @@ public class GrowthController {
     }
 
     @PutMapping("/{username}")
-    public void update(@PathVariable String username) {
+    public void update(Model model, @PathVariable String username) {
     }
 
     @GetMapping
-    public List<Growth> search() {
-       return growthService.search("test");
+    public List<Growth> search(@AuthenticationPrincipal User user) {
+        return growthService.search("test");
     }
 }

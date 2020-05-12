@@ -6,7 +6,7 @@
     </label>
     <label
       >sum
-      <input type="text" v-model="item.sum"/>
+      <input type="text" v-model="item.sum" />
     </label>
     <button type="button" @click="handleClick">添加</button>
     <table>
@@ -25,7 +25,7 @@
         </tr>
       </tbody>
     </table>
-    <div>{{text}}</div>
+    <div>{{ text }}</div>
     <RouterView />
   </div>
 </template>
@@ -40,7 +40,7 @@ export default {
         date: new Date().toJSON()
       },
       list: get('list') || [],
-      text:''
+      text: ''
     };
   },
   components: {},
@@ -58,10 +58,13 @@ export default {
     this.$http.get('/growth').then(res => {
       console.log(res);
     });
-    this.$http.post('/growth/test', {
-      test: 'ccc'
-    })
-    this.$http.put('/growth/test')
+    this.$http.post('/growth/test?rp=123', {
+      sum: '666.2t',
+      level: '750'
+    });
+    this.$http.put('/growth/test', {
+      test: 'put'
+    });
   }
 };
 </script>
