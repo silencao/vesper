@@ -49,11 +49,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).and()
                 .authorizeRequests()
-//                .antMatchers(HttpMethod.POST, "/growth").permitAll()
+                .antMatchers("/needLogin").permitAll()
                 .antMatchers(HttpMethod.GET, "/index*").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin(loginConfigurer -> loginConfigurer
+                        .loginPage("/needLogin")
+                        .loginProcessingUrl("/doLogin")
 //                        .successHandler((request, response, authentication) -> {})
                         .successForwardUrl("/success")
                 )

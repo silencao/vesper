@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "locale": "zh-CN",
     "target": "es6",
     "module": "esnext",
     "strict": true,

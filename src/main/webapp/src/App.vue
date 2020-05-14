@@ -47,7 +47,7 @@ export default {
   components: {},
   methods: {
     login() {
-      this.$http.post('/login', 'username=admin&password=jiny').then(
+      this.$http.post('/doLogin', 'username=admin&password=jiny').then(
         res => {
           console.log(res);
         },
@@ -72,9 +72,10 @@ export default {
     this.$http.post('/growth/test?rp=123', {
       sum: '666.2t',
       level: '750'
-    });
-    this.$http.put('/growth/test', {
-      test: 'put'
+    }).then(res=>{
+      console.log(res);
+    },rej=>{
+      console.log(rej);
     });
   }
 };
