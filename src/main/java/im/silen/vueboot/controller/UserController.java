@@ -15,10 +15,6 @@ public class UserController {
         this.redisTemplate = redisTemplate;
     }
 
-    @RequestMapping("/success")
-    public String success() {
-        return "登录成功";
-    }
 
     @GetMapping("/user/add")
     public String add(@RequestParam String name) {

@@ -66,17 +66,24 @@ export default {
     }
   },
   created() {
-    this.$http.get('/growth').then(res => {
-      console.log(res);
-    });
-    this.$http.post('/growth/test?rp=123', {
-      sum: '666.2t',
-      level: '750'
-    }).then(res=>{
-      console.log(res);
-    },rej=>{
-      console.log(rej);
-    });
+    this.$http.get('/growth').then(
+      res => {
+        console.log(res);
+      },
+      ({ response: { data, status } }) => {
+        console.log(this);
+
+        if (status === 401) {
+          console.log(data)
+          this.$router.push('/login');
+        }
+      }
+    );
+    // this.$http
+    //   .post('/growth/test?rp=123', {
+    //     sum: '666.2t',
+    //     level: '750'
+    //   })
   }
 };
 </script>
