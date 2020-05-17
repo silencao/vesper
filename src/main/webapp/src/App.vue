@@ -47,7 +47,7 @@ export default {
   components: {},
   methods: {
     login() {
-      this.$http.post('/doLogin', 'username=admin&password=jiny').then(
+      this.$http.post('/doLogin', 'username=admin&password=jiny1').then(
         res => {
           console.log(res);
         },

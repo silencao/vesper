@@ -15,4 +15,8 @@ public class JSONObject {
     public static <T> T parse(String json, Class<T> clazz) throws JsonProcessingException {
         return mapper.readValue(json, clazz);
     }
+
+    public static String stringify(Object object) throws JsonProcessingException {
+        return mapper.writeValueAsString(object);
+    }
 }
