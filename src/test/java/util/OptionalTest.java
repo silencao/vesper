@@ -1,16 +1,12 @@
 package util;
 
-import org.junit.jupiter.api.Test;
-
-import javax.validation.constraints.NotNull;
 import java.util.Optional;
-import java.util.function.Predicate;
 
 public class OptionalTest {
     private static boolean equalsTest(String str1, String str2) {
         return Optional.ofNullable(str1).equals(Optional.of(str2));
     }
-    private static boolean equals(String str1, @NotNull String str2){
+    private static boolean equals(String str1, String str2){
         return Optional.ofNullable(str1).filter(str2::equals).isPresent();
     }
 

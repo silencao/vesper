@@ -1,23 +1,27 @@
 package im.silen.vueboot;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import im.silen.vueboot.util.JSONObject;
-import org.apache.catalina.manager.Constants;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.config.annotation.ObjectPostProcessor;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
-import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
+import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 import java.io.IOException;
@@ -28,11 +32,9 @@ import java.util.Map;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private final DataSource dataSource;
-    private final ObjectMapper mapper;
 
-    public WebSecurityConfig(DataSource dataSource, ObjectMapper mapper) {
+    public WebSecurityConfig(DataSource dataSource) {
         this.dataSource = dataSource;
-        this.mapper = mapper;
     }
 
     @Bean
@@ -48,27 +50,36 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).and()
+        AuthenticationEntryPoint     authenticationEntryPoint     = (request, response, authException ) -> handlerWriteString(response, HttpServletResponse.SC_UNAUTHORIZED  , "需要登录！");
+        AuthenticationSuccessHandler authenticationSuccessHandler = (request, response, authentication) -> handlerWriteString(response, HttpServletResponse.SC_OK            , "登录成功！");
+        AuthenticationFailureHandler authenticationFailureHandler = (request, response, exception     ) -> handlerWriteString(response, HttpServletResponse.SC_NOT_ACCEPTABLE, "登录失败！");
+
+        http
+                .csrf(configurer -> configurer
+                        .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
                 .authorizeRequests(configure -> configure
                         .antMatchers(HttpMethod.GET, "/index*").permitAll()
                         .anyRequest().authenticated())
                 .exceptionHandling(configure -> configure
-                        .authenticationEntryPoint((request, response, authException) -> handlerWriteString(response, HttpServletResponse.SC_UNAUTHORIZED, "需要登录！")))
+                        .authenticationEntryPoint(authenticationEntryPoint))
                 .formLogin(configurer -> configurer
-                        .loginPage("/login")
                         .loginProcessingUrl("/doLogin")
-//                        .failureUrl()
-                        .successHandler((request, response, authentication) -> handlerWriteString(response, HttpServletResponse.SC_OK            , "登录成功！"))
-                        .failureHandler((request, response, exception     ) -> handlerWriteString(response, HttpServletResponse.SC_NOT_ACCEPTABLE, "登录失败！"))
-                        /*.addObjectPostProcessor(new ObjectPostProcessor<LoginUrlAuthenticationEntryPoint>() {
+                        .successHandler(authenticationSuccessHandler)
+                        .failureHandler(authenticationFailureHandler)
+                        .addObjectPostProcessor(new ObjectPostProcessor<UsernamePasswordAuthenticationFilter>() {
                             @Override
-                            public <O extends LoginUrlAuthenticationEntryPoint> O postProcess(O object) {
-                                object.setUseForward(true);
-                                // 默认是redirect，ajax访问时会跨域
+                            public <O extends UsernamePasswordAuthenticationFilter> O postProcess(O object) {
+                                object.setContinueChainBeforeSuccessfulAuthentication(true);
+
                                 return object;
                             }
-                        })*/)
-        ;
+                        }))
+                .addFilterAfter(new AbstractAuthenticationProcessingFilter("/doLogin") {
+                    @Override
+                    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException, IOException, ServletException {
+                        return null;
+                    }
+                }, UsernamePasswordAuthenticationFilter.class);
     }
 
     private void handlerWriteString(HttpServletResponse response, int errCode, String errMsg) throws IOException {
