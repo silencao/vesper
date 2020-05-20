@@ -76,7 +76,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         }))
                 .addFilterAfter(new AbstractAuthenticationProcessingFilter("/doLogin") {
                     @Override
-                    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException, IOException, ServletException {
+                    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
                         return null;
                     }
                 }, UsernamePasswordAuthenticationFilter.class);

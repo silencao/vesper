@@ -1,4 +1,4 @@
-package util;
+package im.silen.vueboot.java.util;
 
 import java.util.Optional;
 
@@ -7,6 +7,7 @@ public class OptionalTest {
         return Optional.ofNullable(str1).equals(Optional.of(str2));
     }
     private static boolean equals(String str1, String str2){
+
         return Optional.ofNullable(str1).filter(str2::equals).isPresent();
     }
 

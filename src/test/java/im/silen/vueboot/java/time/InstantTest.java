@@ -1,4 +1,4 @@
-package time;
+package im.silen.vueboot.java.time;
 
 import java.time.Instant;
 import java.time.ZoneId;

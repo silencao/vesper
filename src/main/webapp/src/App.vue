@@ -32,15 +32,14 @@
 </template>
 
 <script>
-import { set, get } from '@utils/localStorageUtil';
 
-export default {
+  export default {
   data() {
     return {
       item: {
         date: new Date().toJSON()
       },
-      list: get('list') || [],
+      list: JSON.parse(localStorage.getItem('list')) || [],
       text: ''
     };
   },
@@ -62,7 +61,7 @@ export default {
       this.item = {
         date: new Date().toJSON()
       };
-      set('list', this.list);
+      localStorage.setItem('list', JSON.stringify(this.list));
     }
   },
   created() {

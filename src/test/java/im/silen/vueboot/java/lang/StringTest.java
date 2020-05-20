@@ -1,4 +1,4 @@
-package lang;
+package im.silen.vueboot.java.lang;
 
 import java.util.Arrays;
 import java.util.regex.Matcher;

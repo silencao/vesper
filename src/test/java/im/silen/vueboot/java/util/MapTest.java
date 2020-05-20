@@ -1,4 +1,4 @@
-package util;
+package im.silen.vueboot.java.util;
 
 import org.junit.jupiter.api.Test;
 
