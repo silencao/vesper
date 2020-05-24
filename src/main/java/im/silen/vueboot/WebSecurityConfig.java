@@ -84,6 +84,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private void handlerWriteString(HttpServletResponse response, int errCode, String errMsg) throws IOException {
         response.setContentType("application/json; charset=utf-8");
+        response.setStatus(errCode);
         Map<String, Object> hashMap = new HashMap<>();
         hashMap.put("errCode", errCode);
         hashMap.put("errMsg" , errMsg);
