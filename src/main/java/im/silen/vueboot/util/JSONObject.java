@@ -12,11 +12,21 @@ public class JSONObject {
         JSONObject.mapper = mapper;
     }
 
-    public static <T> T parse(String json, Class<T> clazz) throws JsonProcessingException {
-        return mapper.readValue(json, clazz);
+    public static <T> T parse(String json, Class<T> clazz) {
+        try {
+            return mapper.readValue(json, clazz);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            throw new RuntimeException();
+        }
     }
 
-    public static String stringify(Object object) throws JsonProcessingException {
-        return mapper.writeValueAsString(object);
+    public static String stringify(Object object) {
+        try {
+            return mapper.writeValueAsString(object);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            throw new RuntimeException();
+        }
     }
 }

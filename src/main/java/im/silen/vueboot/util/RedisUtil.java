@@ -1,20 +1,23 @@
 package im.silen.vueboot.util;
 
-import im.silen.vueboot.growth.Growth;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class RedisUtil {
-    private static StringRedisTemplate stringRedisTemplatee;
-    private static RedisTemplate redisTemplate;
+    private static StringRedisTemplate redisTemplate;
 
-    public RedisUtil(StringRedisTemplate stringRedisTemplate, RedisTemplate redisTemplate) {
-        RedisUtil.stringRedisTemplatee = stringRedisTemplate;
-        this.redisTemplate = redisTemplate;
+    private RedisUtil(StringRedisTemplate stringRedisTemplate) {
+        RedisUtil.redisTemplate = stringRedisTemplate;
     }
 
+    public static List<String> lRange(String key, long start, long end) {
+        return redisTemplate.opsForList().range(key, start, end);
+    }
 
+    public static void lPush(String key, String value) {
+        redisTemplate.opsForList().leftPush(key, value);
+    }
 }

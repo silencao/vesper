@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.io.Resource;
+import org.springframework.data.redis.core.BoundListOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 
@@ -34,6 +35,11 @@ class GrowthServiceTest {
 
     @Test
     void search() {
-        System.out.println(redisTemplate.boundListOps("growths:test").range(0, -1));
+
+        BoundListOperations<Object, Object> listOps = redisTemplate.boundListOps("growths:test");
+        listOps.range(0, -1).forEach(System.out::println);
+        List<Object> g = redisTemplate.opsForList().range("g", 0, -1);
+        System.out.println(g);
+        g.stream().forEach(System.out::println);
     }
 }
