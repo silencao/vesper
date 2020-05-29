@@ -17,7 +17,15 @@ public class RedisUtil {
         return redisTemplate.opsForList().range(key, start, end);
     }
 
-    public static void lPush(String key, String value) {
-        redisTemplate.opsForList().leftPush(key, value);
+    public static String lIndex(String key, long index) {
+        return redisTemplate.opsForList().index(key, index);
+    }
+
+    public static void lSet(String key, long index, String value) {
+        redisTemplate.opsForList().set(key, index, value);
+    }
+
+    public static void lPush(String key, String... values) {
+        redisTemplate.opsForList().leftPushAll(key, values);
     }
 }

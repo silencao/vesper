@@ -1,16 +1,20 @@
 spring:
-  profiles.active: dev
+  profiles.active: debug
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
-
-logging.level:
-  root: info
-  im.silen.vueboot.mapper: trace
 ---
 spring:
-  profiles: dev
+  profiles: debug
 
+logging:
+  file.name: ./logs/debug.log
+  level:
+    root: info
+    im.silen.vueboot.mapper: trace
 ---
 spring:
-  profiles: prod
+  profiles: build
+server.servlet.context-path: /api
+
+logging.file.name: ./logs/build.log
