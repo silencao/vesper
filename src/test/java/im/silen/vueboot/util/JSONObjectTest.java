@@ -20,12 +20,11 @@ class JSONObjectTest {
     @Test
     void parse() throws IOException {
 
-        try (
-                InputStream stream = resource.getInputStream();
-                InputStreamReader streamReader = new InputStreamReader(stream);
-                BufferedReader bufferedReader = new BufferedReader(streamReader);
+        try (InputStream stream = resource.getInputStream();
+             InputStreamReader streamReader = new InputStreamReader(stream);
+             BufferedReader bufferedReader = new BufferedReader(streamReader);
         ) {
-           bufferedReader.lines().forEach(System.out::println);
+            bufferedReader.lines().forEach(System.out::println);
         }
 
         System.out.println("resource.getURI() = " + resource.getURI());

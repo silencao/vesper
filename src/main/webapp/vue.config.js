@@ -7,8 +7,8 @@ module.exports = {
     proxy: {
       '/api': {
           target: 'http://localhost:8080',
-          changeOrigin: true,
-          pathRewrite: {'^/api' : ''}
+          // changeOrigin: true,
+          pathRewrite: {'^/api' : ''}//后端接口地址为/test，前台访问/api/test时把/api替换为空串
       }
     },
     port: 3000
