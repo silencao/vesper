@@ -15,7 +15,7 @@ import java.time.LocalTime;
 public class ObjectMapperTest {
     @Autowired
     private ObjectMapper beanMapper;
-    private ObjectMapper anewMapper = new ObjectMapper();
+    private final ObjectMapper anewMapper = new ObjectMapper();
     private final LocalDate date = LocalDate.now();
 
     private final LocalTime time = LocalTime.now();

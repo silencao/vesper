@@ -9,7 +9,6 @@
             <input type="text" v-model="item.sum" />
         </label>
         <button type="button" @click="handleClick">添加</button>
-        <button type="button" @click="login">快速登录</button>
         <table>
             <thead>
                 <tr>
@@ -42,18 +41,7 @@ export default {
             text: ''
         };
     },
-    components: {},
     methods: {
-        login() {
-            this.$http.post('/doLogin', 'username=admin&password=jiny').then(
-                res => {
-                    console.log(res);
-                },
-                rej => {
-                    console.log(rej);
-                }
-            );
-        },
         handleClick() {
             this.text = JSON.stringify(this.item);
             this.list.push(this.item);

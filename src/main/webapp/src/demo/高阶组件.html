@@ -1,0 +1,39 @@
+<html>
+<body>
+
+<script src="../../node_modules/vue/dist/vue.js"></script>
+<script>
+    (vm => document.body.appendChild(vm.$el))(new Vue({
+        data: {
+            text: 'test'
+        },
+        template: '<div style="background-color: blueviolet">{{text}}</div>'
+    }).$mount(document.createElement('div')))
+
+    let fn1 = function () {
+        document.body.appendChild(new Vue({
+            data: {
+                text: 'test'
+            },
+            template: '<div style="background-color: blueviolet">{{text}}</div>'
+        }).$mount(document.createElement('div')).$el)
+    }
+
+    let fn2 = (subclass => text => document.body.appendChild(new subclass({
+        data() {
+            return {text}
+        },
+        methods: {
+            clickHandler() {
+                console.log('dasd')
+            }
+        }
+    }).$mount(document.createElement('div')).$el))(Vue.extend({
+        data() {
+            return {text: 'fn2'}
+        },
+        template: '<div style="background-color: antiquewhite" @click="clickHandler">{{text}}</div>'
+    }))
+</script>
+</body>
+</html>
