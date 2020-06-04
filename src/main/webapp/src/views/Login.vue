@@ -11,6 +11,7 @@
             <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
             <label for="inputEmail" class="sr-only">Email address</label>
             <input
+                autocomplete="username"
                 type="email"
                 id="inputEmail"
                 class="form-control"
@@ -20,6 +21,7 @@
             />
             <label for="inputPassword" class="sr-only">Password</label>
             <input
+                autocomplete="current-password"
                 type="password"
                 id="inputPassword"
                 class="form-control"
@@ -45,7 +47,7 @@ export default {
     name: 'Login',
     methods: {
         login() {
-            this.$http.post('/doLogin', 'username=admin&password=jiny').then(
+            this.$http.post('/doLogin', 'username=admin&password=jiny&remember-me=true').then(
                 res => {
                     console.log(res);
                     this.$router.back();

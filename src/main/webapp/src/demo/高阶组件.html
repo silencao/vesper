@@ -1,39 +1,44 @@
-<html>
+<html lang="ch">
 <body>
 
 <script src="../../node_modules/vue/dist/vue.js"></script>
 <script>
-    (vm => document.body.appendChild(vm.$el))(new Vue({
+    (/*基本操作，先闭包*/({$el}) => document.body.appendChild($el))(new Vue({
         data: {
             text: 'test'
         },
-        template: '<div style="background-color: blueviolet">{{text}}</div>'
+        template: (
+            '<div>' +
+            '   <div style="background-color: blueviolet">{{text}}</div>' +
+            '   <button type="button" @click="fn1(\'new Vue\')">fn1</button>' +
+            '   <button type="button" @click="fn2(\'Vue.extend\')">fn2</button>' +
+            '</div>'
+        ),
+        methods: {
+            fn1(text) {
+                document.body.appendChild(new Vue({
+                    data: {text},
+                    template: '<div style="background-color: deepskyblue">{{text}}</div>'
+                }).$mount(document.createElement('div')).$el)
+            },
+            fn2: (subclass => text => document.body.appendChild(new subclass({
+                data() {
+                    return {text}
+                },
+                methods: {
+                    clickHandler() {
+                        console.log('dasd')
+                    }
+                }
+            }).$mount(document.createElement('div')).$el))(Vue.extend({
+                data() {
+                    return {text: 'fn2'}
+                },
+                template: '<div style="background-color: antiquewhite" @click="clickHandler">{{text}}</div>'
+            }))
+        }
     }).$mount(document.createElement('div')))
 
-    let fn1 = function () {
-        document.body.appendChild(new Vue({
-            data: {
-                text: 'test'
-            },
-            template: '<div style="background-color: blueviolet">{{text}}</div>'
-        }).$mount(document.createElement('div')).$el)
-    }
-
-    let fn2 = (subclass => text => document.body.appendChild(new subclass({
-        data() {
-            return {text}
-        },
-        methods: {
-            clickHandler() {
-                console.log('dasd')
-            }
-        }
-    }).$mount(document.createElement('div')).$el))(Vue.extend({
-        data() {
-            return {text: 'fn2'}
-        },
-        template: '<div style="background-color: antiquewhite" @click="clickHandler">{{text}}</div>'
-    }))
 </script>
 </body>
 </html>
