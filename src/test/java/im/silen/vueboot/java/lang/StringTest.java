@@ -1,8 +1,11 @@
 package im.silen.vueboot.java.lang;
 
+import org.junit.jupiter.api.Test;
+
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class StringTest {
     public static void main(String[] args) {
@@ -25,6 +28,12 @@ public class StringTest {
                 matchAndGet(s, "电子监管码\\s+(\\d+)\\s条\\(\\+")
         };
         System.out.println(Arrays.asList(strings));
+    }
+
+    @Test
+    void te1() {
+        System.out.println(Arrays.asList(1, 4, 3, 2, -5).stream()
+                .sorted((x, y) -> Integer.compare(x, y)).collect(Collectors.toList()));
     }
 
     public static String matchAndGet(String source, String regex) {
