@@ -1,6 +1,5 @@
-package im.silen.vueboot.controller;
+package im.silen.vueboot.user;
 
-import im.silen.vueboot.service.UserService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,8 +14,10 @@ public class UserController {
 
     @GetMapping("/user/add")
     public String add(
-            @RequestParam String name
+            @RequestParam User user
     ) {
-        return userService.addUser(name, "123456");
+        userService.createUser(user);
+
+        return "ok";
     }
 }

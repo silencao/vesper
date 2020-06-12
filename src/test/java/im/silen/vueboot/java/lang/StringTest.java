@@ -30,10 +30,39 @@ public class StringTest {
         System.out.println(Arrays.asList(strings));
     }
 
+    private void genStr(String birthdayBegin, String birthdayEnd, String sex, String hBsAg, String comms, String moves, String stats, boolean isPrecheck, boolean isAdult) {
+        System.out.println(
+                "查询条件：受种者类别：" + (isAdult ? "成人" : "儿童") + "；" + (isPrecheck ? "今日问诊：√；" : "") + (
+                        "".equals(birthdayBegin)
+                                ? ""
+                                : "出生日期：" + birthdayBegin + ("".equals(birthdayEnd) ? "" : " 至 " + birthdayEnd) + "；"
+                ) + ("".equals(sex  ) ? "" : "性别："       + sex   + "；"
+                ) + ("".equals(hBsAg) ? "" : "母HBsAg："    + hBsAg + "；"
+                ) + ("".equals(comms) ? "" : "居委会："     + comms + "；"
+                ) + ("".equals(moves) ? "" : "户籍类型："   + moves + "；"
+                ) + ("".equals(stats) ? "" : "受种者状态：" + stats + "；"
+                )
+        );
+    }
+
     @Test
-    void te1() {
+    void test1() {
+        genStr("2011-11-11", "", "男", "阴性", "", "", "", true, true);
+        genStr("", "", "女", "", "", "", "", false, true);
+        genStr("2011-11-11", "2011-12-01", "", "未检测", "", "", "", true, false);
+
+
+    }
+
+    @Test
+    void test2() {
         System.out.println(Arrays.asList(1, 4, 3, 2, -5).stream()
                 .sorted((x, y) -> Integer.compare(x, y)).collect(Collectors.toList()));
+    }
+
+    @Test
+    void test3() {
+        System.out.println(StringTest.class.getName());
     }
 
     public static String matchAndGet(String source, String regex) {
