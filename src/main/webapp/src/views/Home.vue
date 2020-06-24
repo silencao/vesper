@@ -43,7 +43,8 @@ export default {
     },
     methods: {
         handleClick() {
-            this.text = JSON.stringify(this.item);
+            this.item.sum = this.item.sum.padStart(6);
+            this.text = JSON.stringify(this.item, ['date', 'level', 'sum']);
             this.list.push(this.item);
             this.item = {
                 date: new Date().toJSON()

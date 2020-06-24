@@ -1,9 +1,11 @@
 <template>
-    <RouterView />
+    <RouterView    @click="testa" />
 </template>
 
 <script>
-export default {};
+export default {
+    methods:{}
+};
 </script>
 
 <style lang="stylus"></style>
