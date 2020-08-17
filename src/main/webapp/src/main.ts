@@ -1,16 +1,20 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import Vue from 'vue';
+import { createApp, App as MainApp } from 'vue';
 import App from './App.vue';
 import router from './router';
 import store from './store';
 import axios from 'axios';
-Vue.prototype.$http = axios;
-Vue.config.productionTip = false;
 
 axios.defaults.baseURL = '/api';
-new Vue({
-  router,
-  store,
-  render: h => h(App)
-}).$mount('#app');
+
+(app => {
+    const rootContainer = document.createElement('div');
+    app.config.globalProperties.$http = axios;
+
+    document.body.appendChild(app.mount(rootContainer).$el);
+})(
+    createApp(App)
+        .use(store)
+        .use(router)
+);

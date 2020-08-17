@@ -1,4 +1,5 @@
 <template>
+    <div>111</div>
     <div class="home">
         <label>
             level
@@ -30,45 +31,52 @@
 </template>
 
 <script>
-export default {
+import axios from 'axios';
+import { defineComponent, ref, reactive} from 'vue';
+import router from '../router'
+const vm = defineComponent({
     name: 'Home',
-    data() {
-        return {
-            item: {
-                date: new Date().toJSON()
-            },
-            list: JSON.parse(localStorage.getItem('list')) || [],
-            text: ''
-        };
-    },
-    methods: {
-        handleClick() {
-            this.item.sum = this.item.sum.padStart(6);
-            this.text = JSON.stringify(this.item, ['date', 'level', 'sum']);
-            this.list.push(this.item);
-            this.item = {
-                date: new Date().toJSON()
-            };
-            localStorage.setItem('list', JSON.stringify(this.list));
-            navigator.clipboard
-                .writeText(this.text)
-                .then(() => console.log('复制成功！'));
-        }
-    },
-    created() {
-        this.$http.get('/growth').then(
+    setup(props, ctx) {
+        axios.get('/growth').then(
             res => {
-                console.log(res);
+                console.log(res.data);
             },
             ({ response: { data, status } }) => {
-                console.log(this);
-
                 if (status === 401) {
                     console.log(data);
-                    this.$router.push('/login');
+                    router.push('/login');
                 }
             }
         );
+
+        let item = reactive({
+            date: new Date().toJSON()
+        });
+
+        const list = reactive(JSON.parse(localStorage.getItem('list')) || []);
+        const text = ref('');
+
+        function handleClick() {
+            item.sum = item.sum.padStart(6);
+            text.value = JSON.stringify(item, ['date', 'level', 'sum']);
+            list.push(item);
+            item = reactive({
+                date: new Date().toJSON()
+            });
+            localStorage.setItem('list', JSON.stringify(list));
+            navigator.clipboard
+                .writeText(text.value)
+                .then(() => console.log('复制成功！'));
+        }
+
+        return {
+            item,
+            list,
+            text,
+            handleClick
+        };
     }
-};
+});
+
+export default vm;
 </script>

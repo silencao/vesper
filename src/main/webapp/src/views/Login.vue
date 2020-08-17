@@ -43,22 +43,27 @@
 </template>
 
 <script>
-export default {
+import { defineComponent } from 'vue';
+
+export default defineComponent({
     name: 'Login',
     methods: {
         login() {
-            this.$http.post('/doLogin', 'username=admin&password=jiny&remember-me=true').then(
-                res => {
-                    console.log(res);
-                    this.$router.back();
-                },
-                rej => {
-                    console.log(rej);
-                }
-            );
+            this.$http
+                .post(
+                    '/doLogin',
+                    'username=admin&password=jiny&remember-me=true'
+                )
+                .then(
+                    res => {
+                        console.log(res);
+                        this.$router.back();
+                    },
+                    rej => {
+                        console.log(rej);
+                    }
+                );
         }
     }
-};
+});
 </script>
-
-<style scoped></style>
