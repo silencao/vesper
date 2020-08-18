@@ -1,0 +1,35 @@
+<html lang="ch">
+<body>
+<script src="../../node_modules/vue/dist/vue.js"></script>
+<script>
+    function setDebounce(eventHandler, milionsecond) {
+        let timer;
+        return function () {
+            if (timer) {
+                clearTimeout(timer);
+            }
+            timer = setTimeout(() => eventHandler.apply(this, [this, ...arguments]), milionsecond);
+        }
+    }
+
+    (/*基本操作，先闭包*/vm => document.body.appendChild(vm.$el))(new Vue({
+        data: {
+            count: 0
+        },
+        template: (
+            '<div>' +
+            '   <div style="background-color: blueviolet;color:#fff;">{{count}}</div>' +
+            '   <button type="button" @click="debounce">防抖</button>' +
+            '</div>'
+        ),
+        methods: {
+            debounce: setDebounce((vm, e) => {
+                vm.count++;
+
+            }, 1000)
+        }
+    }).$mount(document.createElement('div')))
+
+</script>
+</body>
+</html>

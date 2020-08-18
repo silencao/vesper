@@ -13,8 +13,7 @@ axios.defaults.baseURL = '/api';
     app.config.globalProperties.$http = axios;
 
     document.body.appendChild(app.mount(rootContainer).$el);
-})(
-    createApp(App)
-        .use(store)
-        .use(router)
+})(createApp(App)
+    .use(store)
+    .use(router)
 );

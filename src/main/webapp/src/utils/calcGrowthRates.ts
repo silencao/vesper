@@ -30,7 +30,7 @@ function log(data: string[]): void {
         return {
             'old': small,
             'new': large,
-            'res': `${calcGrowthRates(small, large) * 100}%`
+            'res': `${(calcGrowthRates(small, large) * 100).toFixed()}%`
         }
     }))
 }
@@ -42,5 +42,6 @@ log([
     '0.1 -> 2',
     '1a -> 200a',
     '500 -> 2b',
-    '800zz -> 1aaa'
+    '800zz -> 1aaa',
+    ' 13.3a ->  23.0b',
 ])
