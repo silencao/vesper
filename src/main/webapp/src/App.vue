@@ -1,6 +1,6 @@
 <template>
-    <div>{{ readersNumber }} {{ book.title }}
-
+    <div>
+        {{ readersNumber }} {{ book.title }}
         <RouterView />
     </div>
 </template>
@@ -10,15 +10,18 @@ import { defineComponent, ref, reactive } from 'vue';
 
 export default defineComponent({
     name: 'App',
+
     props: {
-        user: String
+        user: {
+            type: String,
+            default: ''
+        }
     },
-    setup(props, ctx) {
+    setup(props) {
         console.log(props);
         const readersNumber = ref(0);
         const book = reactive({ title: 'Vue 3 Guide' });
 
-        // expose to template
         return {
             readersNumber,
             book

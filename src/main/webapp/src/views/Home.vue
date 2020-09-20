@@ -9,6 +9,9 @@
             sum
             <input type="text" v-model="item.sum" />
         </label>
+        <label>
+            <input type="checkbox" />
+        </label>
         <button type="button" @click="handleClick">添加</button>
         <table>
             <thead>
@@ -32,11 +35,11 @@
 
 <script>
 import axios from 'axios';
-import { defineComponent, ref, reactive} from 'vue';
-import router from '../router'
+import { defineComponent, ref, reactive } from 'vue';
+import router from '../router';
 const vm = defineComponent({
     name: 'Home',
-    setup(props, ctx) {
+    setup() {
         axios.get('/growth').then(
             res => {
                 console.log(res.data);
