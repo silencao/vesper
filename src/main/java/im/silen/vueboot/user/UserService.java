@@ -1,29 +1,32 @@
 package im.silen.vueboot.user;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserService implements UserDetailsService {
-    private final JdbcUserDetailsManager userManager;
-    private final PasswordEncoder passwordEncoder;
+    private final UserMapper userMapper;
 
-    private UserService(JdbcUserDetailsManager userManager, PasswordEncoder passwordEncoder) {
-        this.userManager = userManager;
-        this.passwordEncoder = passwordEncoder;
+    private UserService(UserMapper userMapper) {
+        this.userMapper = userMapper;
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 
     @Override
     public User loadUserByUsername(String username) throws UsernameNotFoundException {
-        return null;
+        return userMapper.search(username);
     }
 
     public void createUser(User user) {
-        userManager.createUser(user);
     }
 
     public void updateUser(UserDetails user) {

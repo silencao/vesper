@@ -1,21 +1,18 @@
 package im.silen.vueboot;
 
+import im.silen.vueboot.user.UserService;
 import im.silen.vueboot.util.JSONObject;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 import javax.servlet.http.HttpServletResponse;
-import javax.sql.DataSource;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
@@ -23,21 +20,19 @@ import java.util.Map;
 
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-    private final DataSource dataSource;
+    private final UserService userService;
+    private final PasswordEncoder passwordEncoder;
 
-    public WebSecurityConfig(DataSource dataSource) {
-        this.dataSource = dataSource;
+    public WebSecurityConfig(UserService userService, PasswordEncoder passwordEncoder) {
+        this.userService = userService;
+        this.passwordEncoder = passwordEncoder;
     }
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-    @Bean
-    @Override
-    public JdbcUserDetailsManager userDetailsServiceBean() {
-        return new JdbcUserDetailsManager(dataSource);
-    }
+//    @Bean
+//    @Override
+//    public UserDetailsService userDetailsServiceBean() {
+//        return userService;
+//    }
 
 
     @Override
@@ -58,7 +53,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         .successHandler(authenticationSuccessHandler)
                         .failureHandler(authenticationFailureHandler))
                 .rememberMe(configurer -> configurer
-                        .tokenValiditySeconds(60));
+                        .tokenValiditySeconds(7 * 24 * 60 * 60));
     }
 
     private void handlerWriteString(HttpServletResponse response, int errCode, String errMsg) throws IOException {
@@ -75,6 +70,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsServiceBean()).passwordEncoder(passwordEncoder());
+        auth.userDetailsService(userService).passwordEncoder(passwordEncoder);
     }
 }

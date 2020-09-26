@@ -1,32 +1,21 @@
 <template>
-    <div>
-        {{ readersNumber }} {{ book.title }}
+    <div @click="fn">
+        {{ racData }}
         <RouterView />
     </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, reactive } from 'vue';
+import { defineComponent, reactive } from 'vue';
 
-export default defineComponent({
-    name: 'App',
+export default defineComponent(function App() {
+    const racData: number[] = reactive([]);
 
-    props: {
-        user: {
-            type: String,
-            default: ''
-        }
-    },
-    setup(props) {
-        console.log(props);
-        const readersNumber = ref(0);
-        const book = reactive({ title: 'Vue 3 Guide' });
+    const fn = () => {
+        racData.push(Math.random());
+    };
 
-        return {
-            readersNumber,
-            book
-        };
-    }
+    return { racData, fn };
 });
 </script>
 

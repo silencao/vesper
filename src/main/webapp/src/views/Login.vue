@@ -43,13 +43,14 @@
 </template>
 
 <script>
+import axios from 'axios';
 import { defineComponent } from 'vue';
 
 export default defineComponent({
     name: 'Login',
     methods: {
         login() {
-            this.$http
+            axios
                 .post(
                     '/doLogin',
                     'username=admin&password=jiny&remember-me=true'

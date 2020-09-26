@@ -8,12 +8,9 @@ import axios from 'axios';
 
 axios.defaults.baseURL = '/api';
 
-(app => {
-    const rootContainer = document.createElement('div');
-    app.config.globalProperties.$http = axios;
-
-    document.body.appendChild(app.mount(rootContainer).$el);
-})(createApp(App)
-    .use(store)
-    .use(router)
+document.body.append(
+    createApp(App)
+        .use(store)
+        .use(router)
+        .mount(document.createElement('div')).$el
 );
