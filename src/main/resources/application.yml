@@ -11,7 +11,7 @@ logging:
   file.name: ./logs/debug.log
   level:
     root: info
-    im.silen.vueboot.mapper: trace
+    im.silen.vueboot: trace
 ---
 spring:
   profiles: build

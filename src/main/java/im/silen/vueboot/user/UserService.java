@@ -1,5 +1,6 @@
 package im.silen.vueboot.user;
 
+import im.silen.vueboot.Hello;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -12,9 +13,12 @@ import org.springframework.stereotype.Service;
 public class UserService implements UserDetailsService {
     private final UserMapper userMapper;
 
-    private UserService(UserMapper userMapper) {
+    private final Hello hello;
+    private UserService(UserMapper userMapper, Hello hello) {
         this.userMapper = userMapper;
+        this.hello = hello;
     }
+
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -23,6 +27,7 @@ public class UserService implements UserDetailsService {
 
     @Override
     public User loadUserByUsername(String username) throws UsernameNotFoundException {
+        System.out.println(hello.say(username));
         return userMapper.search(username);
     }
 
