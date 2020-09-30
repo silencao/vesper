@@ -10,7 +10,7 @@ spring:
 logging:
   file.name: ./logs/debug.log
   level:
-    root: info
+    root: debug
     im.silen.vueboot: trace
 ---
 spring:

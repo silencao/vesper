@@ -1,9 +1,6 @@
 package im.silen.vueboot.user;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class UserController {
@@ -18,12 +15,10 @@ public class UserController {
         return userService.loadUserByUsername(username);
     }
 
-    @GetMapping("/user/add")
-    public String add(
-            @RequestParam User user
-    ) {
-        userService.createUser(user);
+    @PostMapping("/user/add")
+    public User add(@RequestBody User user) {
+        userService.createUser(user.getUsername(), user.getPassword());
 
-        return "ok";
+        return user;
     }
 }

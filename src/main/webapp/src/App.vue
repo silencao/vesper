@@ -1,21 +1,32 @@
 <template>
-    <div @click="fn">
-        {{ racData }}
+    <div>
+        用户名：<input type="text" v-model="username" /> 密 码：<input
+            type="text"
+            v-model="password"
+        />
+        <button type="button" @click="reg">注册</button>
+
         <RouterView />
     </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from 'vue';
+import axios from 'axios';
+import { defineComponent, ref } from 'vue';
 
 export default defineComponent(function App() {
-    const racData: number[] = reactive([]);
-
-    const fn = () => {
-        racData.push(Math.random());
+    const username = ref('');
+    const password = ref('');
+    const reg = () => {
+        axios
+            .post('/user/add', {
+                username: username.value,
+                password: password.value
+            })
+            .then(res => console.log(res.data));
     };
 
-    return { racData, fn };
+    return { username, password, reg };
 });
 </script>
 

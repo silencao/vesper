@@ -28,18 +28,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         this.passwordEncoder = passwordEncoder;
     }
 
-//    @Bean
-//    @Override
-//    public UserDetailsService userDetailsServiceBean() {
-//        return userService;
-//    }
-
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        AuthenticationEntryPoint     authenticationEntryPoint     = (request, response, authException ) -> handlerWriteString(response, HttpServletResponse.SC_UNAUTHORIZED, "需要登录！");
-        AuthenticationSuccessHandler authenticationSuccessHandler = (request, response, authentication) -> handlerWriteString(response, HttpServletResponse.SC_OK          , "登录成功！");
-        AuthenticationFailureHandler authenticationFailureHandler = (request, response, exception     ) -> handlerWriteString(response, HttpServletResponse.SC_BAD_REQUEST , "登录失败！");
+        AuthenticationEntryPoint     authenticationEntryPoint     = (request, response, authException ) -> writeAsSpecialStatusCode(response, HttpServletResponse.SC_UNAUTHORIZED, "需要登录！");
+        AuthenticationSuccessHandler authenticationSuccessHandler = (request, response, authentication) -> writeAsSpecialStatusCode(response, HttpServletResponse.SC_OK          , "登录成功！");
+        AuthenticationFailureHandler authenticationFailureHandler = (request, response, exception     ) -> writeAsSpecialStatusCode(response, HttpServletResponse.SC_BAD_REQUEST , "登录失败！");
 
         http
                 .csrf(configurer -> configurer
@@ -56,7 +49,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         .tokenValiditySeconds(7 * 24 * 60 * 60));
     }
 
-    private void handlerWriteString(HttpServletResponse response, int errCode, String errMsg) throws IOException {
+    private void writeAsSpecialStatusCode(HttpServletResponse response, int errCode, String errMsg) throws IOException {
         response.setContentType("application/json; charset=utf-8");
         response.setStatus(errCode);
         Map<String, Object> hashMap = new HashMap<>();

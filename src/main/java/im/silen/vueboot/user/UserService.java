@@ -31,7 +31,8 @@ public class UserService implements UserDetailsService {
         return userMapper.search(username);
     }
 
-    public void createUser(User user) {
+    public void createUser(String username, String password) {
+        userMapper.insert(username, password);
     }
 
     public void updateUser(UserDetails user) {
