@@ -1,17 +1,10 @@
 package im.silen.vueboot;
 
-import im.silen.vueboot.user.UserMapper;
-import org.aopalliance.intercept.Interceptor;
 import org.springframework.aop.*;
 import org.springframework.aop.framework.ProxyFactory;
-import org.springframework.aop.framework.ProxyFactoryBean;
-import org.springframework.aop.interceptor.DebugInterceptor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Primary;
-
-import java.lang.reflect.Method;
 
 @SpringBootApplication
 public class VueBootApplication {

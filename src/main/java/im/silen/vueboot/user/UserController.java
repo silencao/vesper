@@ -2,6 +2,8 @@ package im.silen.vueboot.user;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class UserController {
     private final UserService userService;
@@ -15,10 +17,13 @@ public class UserController {
         return userService.loadUserByUsername(username);
     }
 
+    @GetMapping("/user/searchAll/{username}")
+    public List<User> searchAll(@PathVariable String username) {
+        return userService.searchAll(username);
+    }
+
     @PostMapping("/user/add")
     public User add(@RequestBody User user) {
-        userService.createUser(user.getUsername(), user.getPassword());
-
-        return user;
+        return userService.createUser(user.getUsername(), user.getPassword());
     }
 }

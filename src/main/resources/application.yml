@@ -3,6 +3,10 @@ spring:
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
+  jpa:
+    show-sql: true
+    hibernate.ddl-auto: update
+
 ---
 spring:
   profiles: debug

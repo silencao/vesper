@@ -1,6 +1,5 @@
 package im.silen.vueboot.user;
 
-import im.silen.vueboot.Hello;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -9,30 +8,42 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
 @Service
 public class UserService implements UserDetailsService {
-    private final UserMapper userMapper;
+    private PasswordEncoder passwordEncoder;
+    private final UserRepository userRepository;
 
-    private final Hello hello;
-    private UserService(UserMapper userMapper, Hello hello) {
-        this.userMapper = userMapper;
-        this.hello = hello;
+    private UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
-
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+        this.passwordEncoder = new BCryptPasswordEncoder();
+
+        return passwordEncoder;
     }
 
     @Override
-    public User loadUserByUsername(String username) throws UsernameNotFoundException {
-        System.out.println(hello.say(username));
-        return userMapper.search(username);
+    public User loadUserByUsername(String username) {
+        return userRepository.findByUsername(username).orElseThrow(
+                () -> new UsernameNotFoundException("未找到用户: " + username));
     }
 
-    public void createUser(String username, String password) {
-        userMapper.insert(username, password);
+    public List<User> searchAll(String username) {
+        return userRepository.findAllByUsername(username);
+    }
+
+    public User createUser(String username, String password) {
+        String encode = passwordEncoder.encode(password);
+
+        return userRepository.save(new User(
+                username, encode, true,
+                LocalDateTime.now())
+        );
     }
 
     public void updateUser(UserDetails user) {
