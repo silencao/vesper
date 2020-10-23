@@ -1,26 +1,29 @@
 package im.silen.vueboot.util;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.stereotype.Component;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Component
-public class JSONArray {
-    private static ObjectMapper mapper;
+import static im.silen.vueboot.util.JSONObject.mapper;
 
-    private JSONArray(ObjectMapper mapper) {
-        JSONArray.mapper = mapper;
+public class JSONArray extends ArrayList<JSONObject> {
+    private static final Log logger = LogFactory.getLog(JSONArray.class);
+    public JSONArray() {
+    }
+
+    public static JSONArray parse(String json) {
+        return JSONObject.parse(json, JSONArray.class);
     }
 
     public static <T> List<T> parse(String json, Class<T> clazz) {
         try {
             return mapper.readValue(json, mapper.getTypeFactory().constructCollectionType(List.class, clazz));
         } catch (JsonProcessingException e) {
-            e.printStackTrace();
-            throw new RuntimeException();
+            throw new RuntimeException(e);
         }
     }
 

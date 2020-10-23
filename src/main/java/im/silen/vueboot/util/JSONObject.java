@@ -4,19 +4,36 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 @Component
-public class JSONObject {
+public class JSONObject extends HashMap<String, Object> {
     private static final Log logger = LogFactory.getLog(JSONObject.class);
-    private static ObjectMapper mapper;
+    protected static ObjectMapper mapper = new ObjectMapper();
 
+    public JSONObject() {
+    }
+
+    @Autowired
     private JSONObject(ObjectMapper mapper) {
         JSONObject.mapper = mapper;
+    }
+
+    @Override
+    public JSONObject put(String key, Object value) {
+        super.put(key, value);
+
+        return this;
+    }
+
+    public static JSONObject parse(String json) {
+        return parse(json, JSONObject.class);
     }
 
     public static <T> T parse(String json, Class<T> clazz) {
