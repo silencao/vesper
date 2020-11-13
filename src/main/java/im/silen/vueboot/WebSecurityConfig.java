@@ -1,5 +1,6 @@
 package im.silen.vueboot;
 
+import im.silen.vueboot.csrf.CsrfRepository;
 import im.silen.vueboot.user.UserService;
 import im.silen.vueboot.util.JSONObject;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -34,10 +35,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         AuthenticationSuccessHandler authenticationSuccessHandler = (request, response, authentication) -> writeAsSpecialStatusCode(response, HttpServletResponse.SC_OK          , "登录成功！");
         AuthenticationFailureHandler authenticationFailureHandler = (request, response, exception     ) -> writeAsSpecialStatusCode(response, HttpServletResponse.SC_BAD_REQUEST , "登录失败！");
 
+        CookieCsrfTokenRepository cookieCsrfTokenRepository = CookieCsrfTokenRepository.withHttpOnlyFalse();
+        cookieCsrfTokenRepository.setCookieName(CsrfRepository.DEFAULT_CSRF_COOKIE_NAME);
+        cookieCsrfTokenRepository.setHeaderName(CsrfRepository.DEFAULT_CSRF_HEADER_NAME);
+
         http
-                .csrf(configurer -> configurer
-                        .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
-                .authorizeRequests(configure -> configure
+                .sessionManagement(configure -> configure.maximumSessions(1))
+                .csrf().csrfTokenRepository(cookieCsrfTokenRepository)
+                .and().authorizeRequests(configure -> configure
                         .anyRequest().authenticated())
                 .exceptionHandling(configure -> configure
                         .authenticationEntryPoint(authenticationEntryPoint))
