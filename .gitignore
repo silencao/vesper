@@ -31,5 +31,6 @@ logs/
 
 ### VS Code ###
 .vscode/
-/src/main/resources/static/
-/src/main/webapp/node_scripts/package/**
+
+**/resources/static/
+**/webapp/node_scripts/package/**
