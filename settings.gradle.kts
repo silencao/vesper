@@ -1,3 +1,3 @@
 rootProject.name = "vesper"
 
-include("vue-boot")
+include("rest-client", "vue-boot")

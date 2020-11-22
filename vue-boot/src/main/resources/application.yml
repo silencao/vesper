@@ -8,17 +8,16 @@ spring:
     hibernate.ddl-auto: update
 
 ---
-spring:
-  profiles: debug
+spring.config.activate.on-profile: debug
 
 logging:
   file.name: ./logs/debug.log
   level:
-    root: debug
+    root: info
     im.silen.vueboot: trace
 ---
-spring:
-  profiles: build
+spring.config.activate.on-profile: build
+
 server.servlet.context-path: /api
 
 logging.file.name: ./logs/build.log

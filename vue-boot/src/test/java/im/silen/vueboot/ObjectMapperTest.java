@@ -3,15 +3,18 @@ package im.silen.vueboot;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import im.silen.restclient.json.JSONObject;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.ComponentScan;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @SpringBootTest
+@ComponentScan(basePackages = "im.silen")
 public class ObjectMapperTest {
     @Autowired
     private ObjectMapper beanMapper;
@@ -24,6 +27,7 @@ public class ObjectMapperTest {
 
     @Test
     void writeValueAsString() throws JsonProcessingException {
+        System.out.println(JSONObject.stringify(item));
         System.out.println("anewMapper.writeValueAsString(item) = " + anewMapper.writeValueAsString(item));
         System.out.println("beanMapper.writeValueAsString(item) = " + beanMapper.writeValueAsString(item));
     }

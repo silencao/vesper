@@ -1,4 +1,5 @@
 plugins {
+    java
     id("org.springframework.boot"       ) version "2.4.0"          apply false
     id("io.spring.dependency-management") version "1.0.10.RELEASE" apply false
 }
@@ -11,6 +12,9 @@ subprojects {
     group = "im.silen"
 
     dependencies {
+        implementation("org.springframework.boot:spring-boot-starter-webflux")
+        testImplementation("io.projectreactor:reactor-test")
+        testImplementation("org.springframework.boot:spring-boot-starter-test")
     }
 
     repositories {
@@ -27,5 +31,9 @@ subprojects {
 
     tasks.withType<Test> {
         useJUnitPlatform()
+    }
+
+    tasks.getByName<org.springframework.boot.gradle.tasks.bundling.BootJar>("bootJar") {
+        archiveClassifier.set("executable") // 打包时代码库和执行包避免重名
     }
 }

@@ -1,12 +1,12 @@
 package im.silen.vueboot;
 
-import org.springframework.aop.*;
+import org.springframework.aop.AfterReturningAdvice;
 import org.springframework.aop.framework.ProxyFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = "im.silen")
 public class VueBootApplication {
     @Bean
     public Hello person() {

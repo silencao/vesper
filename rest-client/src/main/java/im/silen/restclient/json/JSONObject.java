@@ -1,4 +1,4 @@
-package im.silen.vueboot.util;
+package im.silen.restclient.json;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -15,7 +15,7 @@ import java.util.Map;
 @Component
 public class JSONObject extends HashMap<String, Object> {
     private static final Log logger = LogFactory.getLog(JSONObject.class);
-    protected static ObjectMapper mapper = new ObjectMapper();
+    public static ObjectMapper mapper = new ObjectMapper();
 
     public JSONObject() {
     }

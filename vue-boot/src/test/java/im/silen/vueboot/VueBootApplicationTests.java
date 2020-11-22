@@ -2,8 +2,8 @@ package im.silen.vueboot;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.TypeFactory;
+import im.silen.restclient.json.JSONObject;
 import im.silen.vueboot.growth.Growth;
-import im.silen.vueboot.util.JSONObject;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

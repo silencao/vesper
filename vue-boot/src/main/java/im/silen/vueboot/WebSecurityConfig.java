@@ -1,8 +1,8 @@
 package im.silen.vueboot;
 
+import im.silen.restclient.json.JSONObject;
 import im.silen.vueboot.csrf.CsrfRepository;
 import im.silen.vueboot.user.UserService;
-import im.silen.vueboot.util.JSONObject;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;

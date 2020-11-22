@@ -1,13 +1,12 @@
 package im.silen.vueboot.util;
 
+import im.silen.restclient.json.JSONArray;
 import im.silen.vueboot.growth.Growth;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
 import java.util.function.Consumer;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class RedisUtilTest {
