@@ -18,11 +18,11 @@ subprojects {
     }
 
     repositories {
-        maven { url = uri("https://maven.aliyun.com/nexus/content/groups/public"             ) }
-        maven { url = uri("https://maven.aliyun.com/nexus/content/repositories/google"       ) }
-        maven { url = uri("https://maven.aliyun.com/nexus/content/repositories/gradle-plugin") }
-        maven { url = uri("https://maven.aliyun.com/nexus/content/repositories/spring"       ) }
-        maven { url = uri("https://maven.aliyun.com/nexus/content/repositories/spring-plugin") }
+        maven { url = uri("https://maven.aliyun.com/repository/public"       ) }
+        maven { url = uri("https://maven.aliyun.com/repository/google"       ) }
+        maven { url = uri("https://maven.aliyun.com/repository/gradle-plugin") }
+        maven { url = uri("https://maven.aliyun.com/repository/spring"       ) }
+        maven { url = uri("https://maven.aliyun.com/repository/spring-plugin") }
     }
 
     configure<JavaPluginConvention> {

@@ -2,7 +2,6 @@ version = "0.0.5"
 
 dependencies {
     implementation(project(":rest-client"))
-    testImplementation(project(":rest-client"))
 
     compileOnly("org.springframework.boot:spring-boot-devtools")
     runtimeOnly("mysql:mysql-connector-java")

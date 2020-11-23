@@ -14,7 +14,6 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @SpringBootTest
-@ComponentScan(basePackages = "im.silen")
 public class ObjectMapperTest {
     @Autowired
     private ObjectMapper beanMapper;
