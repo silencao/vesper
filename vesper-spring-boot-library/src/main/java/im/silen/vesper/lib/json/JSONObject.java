@@ -1,31 +1,18 @@
-package im.silen.restclient.json;
+package im.silen.vesper.lib.json;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
-import org.springframework.context.annotation.Conditional;
-import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-@Component
+import static im.silen.vesper.lib.json.JSONFactory.objectMapper;
+
 public class JSONObject extends HashMap<String, Object> {
     private static final Log logger = LogFactory.getLog(JSONObject.class);
-    public static ObjectMapper mapper = new ObjectMapper();
-
-    public JSONObject() {
-    }
-
-    @Autowired
-    private JSONObject(ObjectMapper mapper) {
-        JSONObject.mapper = mapper;
-    }
 
     @Override
     public JSONObject put(String key, Object value) {
@@ -40,7 +27,8 @@ public class JSONObject extends HashMap<String, Object> {
 
     public static <T> T parse(String json, Class<T> clazz) {
         try {
-            return mapper.readValue(json, clazz);
+
+            return objectMapper.readValue(json, clazz);
         } catch (JsonProcessingException e) {
             logger.error("反序列化出错！", e);
         }
@@ -49,7 +37,7 @@ public class JSONObject extends HashMap<String, Object> {
 
     public static <K, V> Map<K, V> parse(String json, Class<K> keyClass, Class<V> valueClass) {
         try {
-            return mapper.readValue(json, mapper.getTypeFactory().constructMapType(Map.class, keyClass, valueClass));
+            return objectMapper.readValue(json, objectMapper.getTypeFactory().constructMapType(Map.class, keyClass, valueClass));
         } catch (JsonProcessingException e) {
             logger.error("反序列化出错！", e);
         }
@@ -58,7 +46,7 @@ public class JSONObject extends HashMap<String, Object> {
 
     public static <T> T parse(File json, Class<T> clazz) {
         try {
-            return mapper.readValue(json, clazz);
+            return objectMapper.readValue(json, clazz);
         } catch (JsonProcessingException e) {
             logger.error("反序列化出错！", e);
         } catch (IOException e) {
@@ -69,7 +57,7 @@ public class JSONObject extends HashMap<String, Object> {
 
     public static String stringify(Object object) {
         try {
-            return mapper.writeValueAsString(object);
+            return objectMapper.writeValueAsString(object);
         } catch (JsonProcessingException e) {
             logger.error("序列化出错！", e);
             throw new RuntimeException();

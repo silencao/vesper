@@ -1,6 +1,6 @@
 package im.silen.vueboot.java.net.http;
 
-import im.silen.restclient.json.JSONObject;
+import im.silen.vesper.lib.json.JSONObject;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpHeaders;

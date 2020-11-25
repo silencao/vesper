@@ -3,11 +3,10 @@ package im.silen.vueboot;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import im.silen.restclient.json.JSONObject;
+import im.silen.vesper.lib.json.JSONObject;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.ComponentScan;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

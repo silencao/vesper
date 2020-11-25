@@ -1,6 +1,6 @@
 package im.silen.vueboot.java.util.stream;
 
-import im.silen.restclient.json.JSONArray;
+import im.silen.vesper.lib.json.JSONArray;
 import im.silen.vueboot.growth.Growth;
 import org.junit.jupiter.api.Test;
 
