@@ -1,5 +1,9 @@
+plugins {
+    id("java-library")
+}
+
 version = "0.0.1"
 
 dependencies {
-    implementation(project(":vesper-spring-boot-autoconfigure"))
+    api(project(":vesper-spring-boot-autoconfigure"))
 }
