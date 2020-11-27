@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-@Configuration
+@Configuration(proxyBeanMethods = false)
 @ConditionalOnClass
 @AutoConfigureAfter({JacksonAutoConfiguration.class})
 public class VesperAutoConfiguration {

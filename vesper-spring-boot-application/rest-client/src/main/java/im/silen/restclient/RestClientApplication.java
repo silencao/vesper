@@ -1,7 +1,5 @@
 package im.silen.restclient;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import im.silen.vesper.lib.json.JSONFactory;
 import im.silen.vesper.lib.json.JSONObject;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

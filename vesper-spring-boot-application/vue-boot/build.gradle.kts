@@ -1,8 +1,6 @@
 version = "0.0.5"
 
 dependencies {
-    implementation(project(":vesper-spring-boot-application:rest-client"))
-
     compileOnly("org.springframework.boot:spring-boot-devtools")
     runtimeOnly("mysql:mysql-connector-java")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")

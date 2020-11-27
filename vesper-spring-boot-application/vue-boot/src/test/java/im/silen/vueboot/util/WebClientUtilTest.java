@@ -58,7 +58,9 @@ class WebClientUtilTest {
                 .build()
         ).flatMap(webClient -> webClient.get().uri("/")
                 .accept(MediaType.TEXT_PLAIN)
-                .exchange().map(clientResponse -> {
+                .exchangeToMono(clientResponse -> {
+                    WebClient client;
+
                     if (clientResponse.statusCode() == HttpStatus.UNAUTHORIZED) {
                         WebClient.Builder mutate = webClient.mutate();
                         clientResponse.cookies().forEach((key, responseCookies) -> {
@@ -73,10 +75,11 @@ class WebClientUtilTest {
 
                         });
 
-                        return mutate.build();
+                        client = mutate.build();
                     } else {
-                        return webClient;
+                        client = webClient;
                     }
+                    return Mono.just(client);
                 })
         ).blockOptional().orElseThrow();
 
