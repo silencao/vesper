@@ -9,3 +9,8 @@ dependencies {
 
     implementation("org.springframework.boot:spring-boot-autoconfigure")
 }
+
+tasks.getByName<Jar>("jar") {
+    enabled = true
+    archiveClassifier.set("lib")
+}
