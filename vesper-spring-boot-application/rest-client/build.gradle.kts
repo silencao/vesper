@@ -1,4 +1,3 @@
-version = "0.0.1"
-
-dependencies {
+plugins {
+    id("my.project.java-application-conventions")
 }
