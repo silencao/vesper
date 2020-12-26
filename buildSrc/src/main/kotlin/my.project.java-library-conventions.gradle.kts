@@ -4,7 +4,6 @@ plugins {
     `java-library`
 }
 
-tasks.getByName<Jar>("jar") {
-    enabled = true
+tasks.withType<Jar> {
     archiveClassifier.set("lib")
 }

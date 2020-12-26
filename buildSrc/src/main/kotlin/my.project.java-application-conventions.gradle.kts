@@ -1,5 +1,6 @@
 plugins {
     id("my.project.java-common-conventions")
+    id("org.springframework.boot"          )
 }
 
 dependencies {
@@ -11,6 +12,6 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
-tasks.getByName<org.springframework.boot.gradle.tasks.bundling.BootJar>("bootJar") {
+tasks.withType<org.springframework.boot.gradle.tasks.bundling.BootJar> {
     archiveClassifier.set("executable") // 打包时代码库和执行包避免重名
 }

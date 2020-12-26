@@ -8,12 +8,6 @@ repositories {
 }
 
 dependencies {
-    implementation("org.springframework.boot:spring-boot-gradle-plugin:2.4.0")
-
-    implementation(
-            group = "io.spring.dependency-management",
-            name  = "io.spring.dependency-management.gradle.plugin",
-            version = "1.0.10.RELEASE",
-            ext = "pom"
-    )
+    implementation("org.springframework.boot:spring-boot-gradle-plugin:2.4.1")
+    implementation("io.spring.gradle:dependency-management-plugin:1.0.10.RELEASE")
 }
