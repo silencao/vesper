@@ -3,7 +3,3 @@ plugins {
 
     `java-library`
 }
-
-tasks.withType<Jar> {
-    archiveClassifier.set("lib")
-}
