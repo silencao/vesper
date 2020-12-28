@@ -5,8 +5,6 @@ import im.silen.vueboot.growth.Growth;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.Arrays;
-
 @SpringBootTest
 class JSONArrayTest {
 
@@ -25,10 +23,5 @@ class JSONArrayTest {
                 "  }\n" +
                 "]", Growth.class).forEach(System.out::println);
 
-        JSONArray.parse(Arrays.asList(
-                "{\"date\": \"2020-04-19T15:44:28.301Z\",\"level\": 750,\"sum\": \"11.4t\"}",
-                "{\"date\": \"2020-04-25T01:39:17.802Z\", \"level\": 754, \"sum\": \"15.5t\"}",
-                "{\"date\": \"2020-04-25T14:32:54.131Z\", \"level\": 756, \"sum\": \"20.5t\"}"
-        ), Growth.class).forEach(System.out::println);
     }
 }

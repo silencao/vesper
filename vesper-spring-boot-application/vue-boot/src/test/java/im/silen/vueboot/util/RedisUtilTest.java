@@ -1,6 +1,7 @@
 package im.silen.vueboot.util;
 
 import im.silen.vesper.lib.json.JSONArray;
+import im.silen.vesper.lib.redis.RedisUtil;
 import im.silen.vueboot.growth.Growth;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

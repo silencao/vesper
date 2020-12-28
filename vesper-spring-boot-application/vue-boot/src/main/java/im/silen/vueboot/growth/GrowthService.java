@@ -2,7 +2,7 @@ package im.silen.vueboot.growth;
 
 import im.silen.vesper.lib.json.JSONArray;
 import im.silen.vesper.lib.json.JSONObject;
-import im.silen.vueboot.util.RedisUtil;
+import im.silen.vesper.lib.redis.RedisUtil;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;

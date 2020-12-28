@@ -23,10 +23,6 @@ public class RestClientApplication {
     @Bean
     CommandLineRunner lineRunner(WebClient.Builder builder) {
         return args -> {
-            System.out.println(builder.baseUrl("https://spring.io/projects").build()
-                    .get()
-                    .retrieve().bodyToMono(String.class).block());
-
             System.out.println("测试是否注入了自动配置");
             System.out.println(JSONObject.stringify(Collections.singletonMap("datetime", LocalDateTime.now())));
         };
