@@ -4,7 +4,8 @@ plugins {
 
 repositories {
     // for kotlin-dsl plugin
-    gradlePluginPortal()
+    // gradlePluginPortal()
+    maven { url = uri("https://maven.aliyun.com/repository/gradle-plugin") }
 }
 
 dependencies {
