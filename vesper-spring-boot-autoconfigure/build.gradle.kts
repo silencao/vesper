@@ -3,8 +3,9 @@ plugins {
 }
 
 dependencies {
-    api(project(":vesper-spring-boot-library"))
+    implementation(project(":vesper-spring-boot-library"))
+    compileOnly("org.springframework.boot:spring-boot-starter-json")
     compileOnly("org.springframework.boot:spring-boot-starter-data-redis")
 
-    implementation("org.springframework.boot:spring-boot-autoconfigure")
+//    annotationProcessor("org.springframework.boot:spring-boot-autoconfigure")
 }

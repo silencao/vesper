@@ -11,23 +11,31 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.core.StringRedisTemplate;
 
 @Configuration(proxyBeanMethods = false)
-@ConditionalOnClass
-@AutoConfigureAfter({JacksonAutoConfiguration.class})
 public class VesperAutoConfiguration {
-    @Bean
-    public JSONFactory jsonFactory(ObjectMapper objectMapper) {
-        JSONFactory factory = new JSONFactory();
 
-        factory.customize(objectMapper);
-        return factory;
+    @Configuration(proxyBeanMethods = false)
+    @ConditionalOnClass(ObjectMapper.class)
+    @AutoConfigureAfter({JacksonAutoConfiguration.class})
+    static class JSONFactoryConfiguration {
+        @Bean
+        public JSONFactory jsonFactory(ObjectMapper objectMapper) {
+            JSONFactory factory = new JSONFactory();
+
+            factory.customize(objectMapper);
+            return factory;
+        }
+
     }
 
-    @Bean
-    @ConditionalOnClass({StringRedisTemplate.class})
-    public RedisCustomizer redisCustomizer(StringRedisTemplate stringRedisTemplate) {
-        RedisCustomizer customizer = new RedisCustomizer();
+    @Configuration(proxyBeanMethods = false)
+    @ConditionalOnClass(StringRedisTemplate.class)
+    static class RedisCustomizerConfiguration {
+        @Bean
+        public RedisCustomizer redisCustomizer(StringRedisTemplate stringRedisTemplate) {
+            RedisCustomizer customizer = new RedisCustomizer();
 
-        customizer.customize(stringRedisTemplate);
-        return customizer;
+            customizer.customize(stringRedisTemplate);
+            return customizer;
+        }
     }
 }

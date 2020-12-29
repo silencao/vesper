@@ -3,5 +3,6 @@ plugins {
 }
 
 dependencies {
+    api(project(":vesper-spring-boot-library"))
     api(project(":vesper-spring-boot-autoconfigure"))
 }
