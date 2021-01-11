@@ -1,7 +1,6 @@
 package im.silen.restclient;
 
 import im.silen.vesper.lib.json.JSONObject;
-import im.silen.vesper.lib.redis.RedisUtil;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.WebApplicationType;
@@ -25,8 +24,7 @@ public class RestClientApplication {
         return args -> {
             System.out.println("测试是否注入了自动配置");
             System.out.println(JSONObject.stringify(Collections.singletonMap("datetime", LocalDateTime.now())));
-            System.out.println(RedisUtil.lIndex("", 3));
         };
-    };
+    }
 
 }

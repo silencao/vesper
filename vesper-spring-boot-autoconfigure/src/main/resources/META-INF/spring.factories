@@ -1,2 +1,3 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-im.silen.vesper.autoconfigure.VesperAutoConfiguration
+  im.silen.vesper.autoconfigure.json.JsonAutoConfiguration,\
+  im.silen.vesper.autoconfigure.VesperAutoConfiguration
