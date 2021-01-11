@@ -20,7 +20,7 @@ public class GrowthTest {
     private ObjectMapper objectMapper;
     @Test
     void name() throws FileNotFoundException {
-        File file = ResourceUtils.getFile("classpath:growth.json");
+        File file = ResourceUtils.getFile("classpath:im/silen/restclient/growth/data/growth.json");
 
         Growth growth1 = JSONObject.parse(file, Growth.class);
         Growth growth2 = JSONObject.parse("{\"sum\":\"89.4x\",\"date\":\"2021-12-26\",\"level\":13}", Growth.class);
@@ -35,7 +35,7 @@ public class GrowthTest {
             e.printStackTrace();
         }
         try {
-            File src = ResourceUtils.getFile("classpath:growths.json");
+            File src = ResourceUtils.getFile("classpath:im/silen/restclient/growth/data/growths.json");
             String json = "[\n" +
                     "  {\"date\": \"2020-04-19T15:44:28.301Z\", \"level\": 750, \"sum\": \"11.4t\"},\n" +
                     "  {\"date\": \"2020-04-25T01:39:17.802Z\", \"level\": 754, \"sum\": \"15.5t\"},\n" +
