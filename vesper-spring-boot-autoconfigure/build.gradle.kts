@@ -7,5 +7,5 @@ dependencies {
     compileOnly("org.springframework.boot:spring-boot-starter-json")
     compileOnly("org.springframework.boot:spring-boot-starter-data-redis")
 
-//    annotationProcessor("org.springframework.boot:spring-boot-autoconfigure")
+    annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
 }

@@ -1,0 +1,10 @@
+{
+  "properties": [
+    {
+      "name": "vesper.json-format.local-date-time",
+      "type": "java.lang.String",
+      "sourceType": "im.silen.vesper.autoconfigure.json.JsonFormatProperties",
+      "description": "JsonFormat pattern for LocalDateTime."
+    }
+  ]
+}
