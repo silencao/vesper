@@ -1,4 +1,4 @@
-package im.silen.restclient.growth;
+package im.silen.vesper.growth;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectReader;

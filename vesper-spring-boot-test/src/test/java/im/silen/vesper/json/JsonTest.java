@@ -1,4 +1,4 @@
-package im.silen.restclient;
+package im.silen.vesper.json;
 
 import im.silen.vesper.lib.json.JSONObject;
 import org.junit.jupiter.api.Test;
@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 
 @SpringBootTest
-class RestClientApplicationTests {
+class JsonTest {
 
     @Test
     void contextLoads() {

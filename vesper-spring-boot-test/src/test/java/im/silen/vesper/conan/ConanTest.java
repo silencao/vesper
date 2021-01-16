@@ -1,4 +1,4 @@
-package im.silen.restclient.conan;
+package im.silen.vesper.conan;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
