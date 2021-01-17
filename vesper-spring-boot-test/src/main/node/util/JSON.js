@@ -1,5 +1,3 @@
-const util = require('util');
-
 function stringify(list, replacer, spaces = 2) {
     const space = Array(spaces + 1).join(' ');
 
