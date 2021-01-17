@@ -2,6 +2,7 @@ rootProject.name = "vesper"
 // 示例模块
 include("vesper-spring-boot-demo:reactor-netty")
 // 应用模块
+include("vesper-spring-boot-application:flux-server")
 include("vesper-spring-boot-application:rest-client")
 include("vesper-spring-boot-application:vue-boot")
 include("vesper-spring-boot-autoconfigure")
