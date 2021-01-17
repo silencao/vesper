@@ -2,6 +2,8 @@ package im.silen.vesper.lib.json;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -9,14 +11,21 @@ import java.util.stream.Collectors;
 import static im.silen.vesper.lib.json.JSONFactory.objectMapper;
 
 public class JSONArray extends ArrayList<JSONObject> {
-    public static JSONArray parse(String json) {
-        return JSONObject.parse(json, JSONArray.class);
-    }
+    public static JSONArray parse(String json) { return JSONObject.parse(json, JSONArray.class); }
+    public static JSONArray parse(File   file) { return JSONObject.parse(file, JSONArray.class); }
 
     public static <T> List<T> parse(String json, Class<T> clazz) {
         try {
             return objectMapper.readerForListOf(clazz).readValue(json);
         } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static <T> List<T> parse(File file, Class<T> clazz) {
+        try {
+            return objectMapper.readerForListOf(clazz).readValue(file);
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }

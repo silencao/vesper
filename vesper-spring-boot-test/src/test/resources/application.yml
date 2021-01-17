@@ -1,2 +1,4 @@
 vesper.json-format:
   local-date-time: yyyy-MM-dd HH:mm:ss.SSS
+
+spring.jackson.default-property-inclusion: non_null
