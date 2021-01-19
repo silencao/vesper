@@ -10,3 +10,5 @@ include("vesper-spring-boot-library")
 include("vesper-spring-boot-starter")
 // 测试模块
 include("vesper-spring-boot-test")
+// 其他模块
+include("kotlin-getting-started")
