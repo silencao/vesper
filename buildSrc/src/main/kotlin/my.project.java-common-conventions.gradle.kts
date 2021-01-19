@@ -2,6 +2,7 @@ plugins {
     java
     eclipse
     id("my.project.spring-dependency-management")
+    id("my.project.test-conventions")
 }
 
 /**
@@ -23,12 +24,4 @@ eclipse.classpath {
         }
     }
     file.whenMerged(action)
-}
-configure<JavaPluginConvention> {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
-}
-
-tasks.withType<Test> {
-    useJUnitPlatform()
 }
