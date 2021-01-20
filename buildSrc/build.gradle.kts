@@ -19,8 +19,8 @@ dependencies {
     /**
      * springboot项目构建所需
      * ps: gradlew --version 如果kotlin是1.4.20，
-     * 如果通过kotlin("allopen")则自动引入1.4.20版本插件
-     * 还通过下面注释方式指定版本号引入依赖，这个jar会依赖kotlin("allopen")对应插件
+     * 此时通过kotlin("allopen")则自动引入1.4.20版本插件
+     * 还可以通过下面注释方式指定版本号引入依赖，这个jar会依赖kotlin("allopen")对应插件
      * implementation(
      *     group = "org.jetbrains.kotlin.plugin.spring",
      *     name  = "org.jetbrains.kotlin.plugin.spring.gradle.plugin",

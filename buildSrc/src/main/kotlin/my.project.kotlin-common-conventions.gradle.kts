@@ -1,6 +1,6 @@
 plugins {
     kotlin("jvm")
-    id("my.project.eclipse-build-conventions")
+    eclipse
     id("my.project.spring-dependency-management")
     id("my.project.test-conventions")
 }
@@ -13,4 +13,15 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
         freeCompilerArgs = listOf("-Xjsr305=strict")
         jvmTarget = "11"
     }
+}
+// STS4完全不支持kotlin项目，模块配置全清
+eclipse {
+    project.file.whenMerged(Action<org.gradle.plugins.ide.eclipse.model.Project> { 
+        buildCommands.clear()
+        natures      .clear()
+    })
+    
+    classpath.file.whenMerged(Action<org.gradle.plugins.ide.eclipse.model.Classpath> {
+        entries.clear()
+    })
 }
