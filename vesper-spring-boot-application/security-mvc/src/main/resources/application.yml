@@ -1,0 +1,13 @@
+server:
+  servlet.context-path: /api
+  error:
+    path: /hasError
+
+logging.level.org.springframework: trace
+logging.logback.rollingpolicy:
+  max-history: 1
+  max-file-size: 256KB
+  clean-history-on-start: true
+vesper:
+  json-format:
+    local-date-time: yyyy-MM-dd HH:mm:ss
