@@ -8,5 +8,11 @@ dependencies {
 }
 
 application {
-    mainClass.set("MainKt")
+    mainClass.set("demo.MainKt")
 }
+
+/*tasks.jar {
+    manifest.attributes(
+        "Main-Class" to application.mainClass.get()
+    )
+}*/
