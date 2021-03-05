@@ -1,7 +1,6 @@
 plugins {
-    kotlin("jvm")
+    kotlin("jvm") // 好像还可以这么写 `kotlin-platform-jvm`
     eclipse
-    id("my.project.spring-dependency-management")
     id("my.project.test-conventions")
 }
 
@@ -11,7 +10,7 @@ dependencies {
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
     kotlinOptions {
         freeCompilerArgs = listOf("-Xjsr305=strict")
-        jvmTarget = "11"
+        jvmTarget = "1.8"
     }
 }
 // STS4完全不支持kotlin项目，模块配置全清
