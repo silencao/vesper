@@ -13,4 +13,5 @@ include("vesper-spring-boot-starter")
 // 测试模块
 include("vesper-spring-boot-test")
 // 其他模块
+include("vesper-js-application")
 include("kotlin-getting-started")
