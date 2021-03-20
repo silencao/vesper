@@ -7,6 +7,11 @@ plugins {
     id("my.project.spring-dependency-management")
     id("my.project.test-conventions")
 }
+
+configure<JavaPluginConvention> {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
 /**
  * 修改 eclipse build path
  * 和 gradle build 到一起
