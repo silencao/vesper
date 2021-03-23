@@ -16,3 +16,10 @@ include("vesper-spring-boot-test")
 include("vesper-gradle-plugin")
 include("vesper-js-application")
 include("kotlin-getting-started")
+
+pluginManagement {
+    repositories {
+        maven { url = uri("https://maven.aliyun.com/repository/gradle-plugin") }
+        mavenLocal()
+    }
+}

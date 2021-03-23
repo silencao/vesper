@@ -3,11 +3,12 @@ package js.nodejs
 import org.gradle.testfixtures.ProjectBuilder
 import kotlin.test.Test
 
-class NodeJsSetupTaskTest {
+open class NodeJsSetupTaskTest {
     @Test
     fun exec() {
         val project = ProjectBuilder.builder().build()
 
-        project.tasks.register("setUp", NodeJsSetupTask::class.java).get().exec()
+        project.plugins.apply(NodeJsPlugin::class.java)
+        (project.tasks.getByName(NodeJsSetupTask.NAME) as NodeJsSetupTask).exec()
     }
 }

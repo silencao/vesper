@@ -8,4 +8,8 @@ open class NodeJsSetupTask : DefaultTask() {
     fun exec() {
         project.logger.warn(" hello world ")
     }
+
+    companion object {
+        const val NAME: String = "kotlinNodeJsSetup"
+    }
 }
