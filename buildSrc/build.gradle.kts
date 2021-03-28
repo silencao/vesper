@@ -2,15 +2,6 @@ plugins {
     `kotlin-dsl`
 }
 
-repositories {
-    // for kotlin-dsl plugin
-    maven { url = uri("https://maven.aliyun.com/repository/gradle-plugin") }
-    maven { url = uri("https://maven.aliyun.com/repository/public"       ) }
-    maven { url = uri("https://maven.aliyun.com/repository/spring-plugin") }
-    maven { url = uri("https://maven.aliyun.com/repository/spring"       ) }
-    maven { url = uri("https://maven.aliyun.com/repository/google"       ) }
-}
-
 dependencies {
     implementation("org.springframework.boot:spring-boot-gradle-plugin:2.4.3")
     implementation("io.spring.gradle:dependency-management-plugin:1.0.11.RELEASE")
