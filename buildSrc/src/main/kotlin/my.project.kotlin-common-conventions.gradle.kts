@@ -1,5 +1,5 @@
 plugins {
-    kotlin("jvm") // 好像还可以这么写 `kotlin-platform-jvm`
+    kotlin("jvm")
     eclipse
     id("my.project.test-conventions")
 }

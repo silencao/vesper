@@ -5,6 +5,10 @@ plugins {
     kotlin("plugin.spring")
 }
 
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+    kotlinOptions.jvmTarget = "1.8"
+}
+
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter")
 }
