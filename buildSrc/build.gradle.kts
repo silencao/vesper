@@ -4,7 +4,6 @@ plugins {
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-gradle-plugin:2.4.4")
-    implementation("io.spring.gradle:dependency-management-plugin:1.0.11.RELEASE")
     /**
      * kotlin项目构建必须依赖此插件
      * ps: kotlin("module-name") 引入当前gradle中kotlin对应版本的插件

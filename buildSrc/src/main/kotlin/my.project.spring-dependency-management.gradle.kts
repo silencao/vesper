@@ -1,10 +1,9 @@
-plugins {
-    id("io.spring.dependency-management")
-}
-
-dependencyManagement {
-    imports {
-        // spring的依赖管理插件导入springboot当前版本关联的BOM
-        mavenBom(org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES)
+/* 使用当前springboot版本提供的依赖版本号管理
+ * 此插件应用于java所有项目
+ * 而kotlin只有springboot项目使用，因为开发gradle插件时，应使用跟gradle配套的版本
+ * 而springboot-application得用spring官方推荐的版本 */
+configurations.all {
+    dependencies {
+        add(name, platform(org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES))
     }
 }
