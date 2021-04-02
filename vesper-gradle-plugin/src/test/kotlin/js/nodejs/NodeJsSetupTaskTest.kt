@@ -8,7 +8,9 @@ open class NodeJsSetupTaskTest {
     fun exec() {
         val project = ProjectBuilder.builder().build()
 
+        println(project.gradle.gradleUserHomeDir.absolutePath)
+        println(project.gradle.gradleHomeDir?.absoluteFile)
         project.plugins.apply(NodeJsPlugin::class.java)
-        (project.tasks.getByName(NodeJsSetupTask.NAME) as NodeJsSetupTask).exec()
+//        (project.tasks.getByName(NodeJsSetupTask.NAME) as NodeJsSetupTask).exec()
     }
 }

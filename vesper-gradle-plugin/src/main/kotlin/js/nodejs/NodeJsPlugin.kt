@@ -13,6 +13,7 @@ open class NodeJsPlugin : Plugin<Project> {
             it.description = "Download and install a local node/npm version"
         }
 
+        project.extensions.create("nodeJs", NodeJsExtension::class.java)
 //        val rootClean = project.rootProject.tasks.named(BasePlugin.CLEAN_TASK_NAME)
         val clean = project.tasks.named(BasePlugin.CLEAN_TASK_NAME)
 
