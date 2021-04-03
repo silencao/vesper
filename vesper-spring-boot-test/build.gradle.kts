@@ -1,5 +1,5 @@
 plugins {
-    id("my.project.java-application-conventions")
+    my.project.`java-spring-boot-conventions`
 }
 
 dependencies {

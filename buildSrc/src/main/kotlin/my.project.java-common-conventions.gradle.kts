@@ -8,7 +8,7 @@ plugins {
     id("my.project.test-conventions")
 }
 
-configure<JavaPluginConvention> {
+java {
     sourceCompatibility = JavaVersion.VERSION_11
     targetCompatibility = JavaVersion.VERSION_11
 }
