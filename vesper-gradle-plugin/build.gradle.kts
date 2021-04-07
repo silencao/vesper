@@ -13,7 +13,10 @@ gradlePlugin {
     }
 }
 
+tasks.test {
+    useTestNG()
+}
+
 dependencies {
-    testImplementation(kotlin("test"))
-    testImplementation(kotlin("test-junit"))
+    testImplementation(kotlin("test-testng"))
 }

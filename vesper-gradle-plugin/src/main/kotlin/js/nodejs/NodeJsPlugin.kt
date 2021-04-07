@@ -13,9 +13,16 @@ open class NodeJsPlugin : Plugin<Project> {
             it.description = "Download and install a local node/npm version"
         }
 
-        project.extensions.create("nodeJs", NodeJsExtension::class.java)
+        val nodeJsExtension = project.extensions.create("nodeJs", NodeJsExtension::class.java, project)
 //        val rootClean = project.rootProject.tasks.named(BasePlugin.CLEAN_TASK_NAME)
         val clean = project.tasks.named(BasePlugin.CLEAN_TASK_NAME)
+
+        tasks.register("hello") {
+            it.group = TASKS_GROUP_NAME
+
+            println(nodeJsExtension.installationDir)
+            println(nodeJsExtension.nodeVersion)
+        }
 
         tasks.register("kotlinNpmInstall") {
             it.dependsOn(setupTask)
