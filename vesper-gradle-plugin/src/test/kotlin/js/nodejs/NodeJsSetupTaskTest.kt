@@ -23,7 +23,11 @@ internal class NodeJsSetupTaskTest {
 
         println(project.gradle.gradleUserHomeDir.absolutePath)
         println(project.gradle.gradleHomeDir?.absoluteFile)
-        project.plugins.apply(NodeJsPlugin::class.java)
-//        (project.tasks.getByName(NodeJsSetupTask.NAME) as NodeJsSetupTask).exec()
+        project.pluginManager.apply(NodeJsPlugin::class.java)
+
+        val extension = project.extensions.getByType(NodeJsExtension::class.java)
+        println(NodeJsPlatform.name)
+        println(extension.env)
+//        project.tasks.named(NodeJsSetupTask.NAME, NodeJsSetupTask::class.java).get().exec()
     }
 }

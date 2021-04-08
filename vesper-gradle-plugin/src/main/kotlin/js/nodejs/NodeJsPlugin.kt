@@ -31,9 +31,17 @@ open class NodeJsPlugin : Plugin<Project> {
 
             it.mustRunAfter(clean)
         }
+
+        NodeJsExec.create("nodeJsTest", nodeJsExtension) {
+            it.group = TASKS_GROUP_NAME
+        }
     }
 
     companion object {
         const val TASKS_GROUP_NAME: String = "nodeJs"
+
+        fun ext(project: Project): NodeJsExtension {
+            return project.extensions.getByType(NodeJsExtension::class.java)
+        }
     }
 }
