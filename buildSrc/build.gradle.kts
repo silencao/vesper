@@ -21,4 +21,5 @@ dependencies {
      * )
      */
     implementation(kotlin("allopen"))
+    implementation(kotlin("serialization"))
 }

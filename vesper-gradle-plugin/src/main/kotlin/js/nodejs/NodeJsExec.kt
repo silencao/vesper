@@ -1,15 +1,10 @@
 package js.nodejs
 
 import org.gradle.api.Action
-import org.gradle.api.tasks.AbstractExecTask
+import org.gradle.api.tasks.Exec
 import org.gradle.api.tasks.TaskProvider
-import javax.inject.Inject
 
-open class NodeJsExec
-@Inject
-constructor(
-) : AbstractExecTask<NodeJsExec>(NodeJsExec::class.java) {
-
+open class NodeJsExec : Exec() {
     companion object {
         fun create(
             name: String,
@@ -20,8 +15,10 @@ constructor(
             val env = extension.env
 
             return project.tasks.register(name, NodeJsExec::class.java) {
-                it.executable = env.nodeExecutable
-                it.args?.add("-v")
+                it.commandLine = listOf(env.nodeExecutable, "-h")
+
+                println(it.executable)
+                println(it.args)
 
                 configurationAction.execute(it)
             }
