@@ -6,7 +6,8 @@ listOf(
     JavaPlugin.IMPLEMENTATION_CONFIGURATION_NAME,
     JavaPlugin.ANNOTATION_PROCESSOR_CONFIGURATION_NAME
 ).forEach {
-    dependencies {
-        add(it, platform(org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES))
-    }
+    if (configurations.names.contains(it))
+        dependencies {
+            add(it, platform(org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES))
+        }
 }

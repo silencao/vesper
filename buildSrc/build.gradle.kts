@@ -3,12 +3,15 @@ plugins {
 }
 
 dependencies {
-    implementation("org.springframework.boot:spring-boot-gradle-plugin:2.4.4")
+    val useKotlinVersion     = project.extra["use.kotlin.version"     ] as String
+    val useSpringBootVersion = project.extra["use.spring.boot.version"] as String
+
+    implementation("org.springframework.boot:spring-boot-gradle-plugin:$useSpringBootVersion")
     /**
      * kotlin项目构建必须依赖此插件
      * ps: kotlin("module-name") 引入当前gradle中kotlin对应版本的插件
      */
-    implementation(kotlin("gradle-plugin"))
+    implementation(kotlin("gradle-plugin", useKotlinVersion))
     /**
      * springboot项目构建所需
      * ps: gradlew --version 如果kotlin是1.4.20，
@@ -20,6 +23,6 @@ dependencies {
      *     version = "1.4.21"
      * )
      */
-    implementation(kotlin("allopen"))
-    implementation(kotlin("serialization"))
+    implementation(kotlin("allopen"      , useKotlinVersion))
+    implementation(kotlin("serialization", useKotlinVersion))
 }
