@@ -1,8 +1,6 @@
 plugins {
-    my.project.`kotlin-application-conventions`
-//    kotlin("plugin.serialization")
-//    org.jetbrains.kotlin.plugin.serialization
-    `kotlinx-serialization`
+    id("my.project.kotlin-application-conventions")
+    id("my.project.kotlin-plugin-serialization")
 }
 
 application {
@@ -10,9 +8,5 @@ application {
 }
 
 dependencies {
-//    platform(org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES) {
-//        println(this)
-//    }
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.1.0")
-    implementation("io.spring.gradle:dependency-management-plugin")
 }
