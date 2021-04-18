@@ -1,4 +1,4 @@
-package js.nodejs
+package nodejs
 
 import logging.kotlinInfo
 import org.gradle.api.Project

@@ -1,4 +1,4 @@
-package js.nodejs
+package nodejs
 
 internal object NodeJsPlatform {
     private val props = System.getProperties()

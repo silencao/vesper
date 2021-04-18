@@ -1,4 +1,4 @@
-package js.nodejs
+package nodejs
 
 import org.gradle.testfixtures.ProjectBuilder
 import org.gradle.util.GFileUtils

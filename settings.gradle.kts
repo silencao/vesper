@@ -1,9 +1,11 @@
 rootProject.name = "vesper"
 apply(from = "gradle/shared.repositories.settings.gradle.kts")
 
-includeBuild("build-logic")
+// 构建插件
+includeBuild("vesper-gradle-plugin")
 // 示例模块
-include("vesper-spring-boot-demo:reactor-netty")
+include("vesper-demo:kotlin-getting-started")
+include("vesper-demo:reactor-netty")
 // 应用模块
 include("vesper-spring-boot-application:flux-server")
 include("vesper-spring-boot-application:hello-kotlin")
@@ -17,8 +19,5 @@ include("vesper-spring-boot-starter")
 include("vesper-spring-boot-test")
 // 其他模块
 include("vesper-js-application")
-include("kotlin-getting-started")
-
-includeBuild("vesper-gradle-plugin")
 
 enableFeaturePreview("VERSION_CATALOGS")

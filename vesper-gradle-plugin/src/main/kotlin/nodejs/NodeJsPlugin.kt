@@ -1,4 +1,4 @@
-package js.nodejs
+package nodejs
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -9,8 +9,8 @@ open class NodeJsPlugin : Plugin<Project> {
         plugins.apply(BasePlugin::class.java)
 
         val setupTask = tasks.register(NodeJsSetupTask.NAME, NodeJsSetupTask::class.java) {
-            it.group = TASKS_GROUP_NAME
-            it.description = "Download and install a local node/npm version"
+            group = TASKS_GROUP_NAME
+            description = "Download and install a local node/npm version"
         }
 
         val nodeJsExtension = project.extensions.create("nodeJs", NodeJsExtension::class.java, project)
@@ -18,22 +18,22 @@ open class NodeJsPlugin : Plugin<Project> {
         val clean = project.tasks.named(BasePlugin.CLEAN_TASK_NAME)
 
         tasks.register("hello") {
-            it.group = TASKS_GROUP_NAME
+            group = TASKS_GROUP_NAME
 
             println(nodeJsExtension.installationDir)
             println(nodeJsExtension.nodeVersion)
         }
 
         tasks.register("kotlinNpmInstall") {
-            it.dependsOn(setupTask)
-            it.group = TASKS_GROUP_NAME
-            it.description = "Find, download and link NPM dependencies and projects"
+            dependsOn(setupTask)
+            group = TASKS_GROUP_NAME
+            description = "Find, download and link NPM dependencies and projects"
 
-            it.mustRunAfter(clean)
+            mustRunAfter(clean)
         }
 
         NodeJsExec.create("nodeJsTest", nodeJsExtension) {
-            it.group = TASKS_GROUP_NAME
+            group = TASKS_GROUP_NAME
         }
     }
 

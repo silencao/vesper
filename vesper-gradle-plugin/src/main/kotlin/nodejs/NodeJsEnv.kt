@@ -1,4 +1,4 @@
-package js.nodejs
+package nodejs
 
 import java.io.File
 

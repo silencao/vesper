@@ -1,4 +1,4 @@
-package js.nodejs
+package nodejs
 
 import org.gradle.api.Action
 import org.gradle.api.tasks.Exec
@@ -15,12 +15,12 @@ open class NodeJsExec : Exec() {
             val env = extension.env
 
             return project.tasks.register(name, NodeJsExec::class.java) {
-                it.commandLine = listOf(env.nodeExecutable, "-h")
+                commandLine = listOf(env.nodeExecutable, "-h")
 
-                println(it.executable)
-                println(it.args)
+                println(executable)
+                println(args)
 
-                configurationAction.execute(it)
+                configurationAction.execute(this)
             }
         }
     }

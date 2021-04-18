@@ -1,4 +1,4 @@
-package js.nodejs
+package nodejs
 
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.TaskAction
@@ -9,15 +9,15 @@ open class NodeJsSetupTask : DefaultTask() {
 
     @TaskAction
     fun exec() {
-        val repo = project.repositories.ivy {  repo ->
-            repo.name = "Node Distributions at ${extension.nodeDownloadBaseUrl}"
-            repo.url = URI(extension.nodeDownloadBaseUrl)
+        val repo = project.repositories.ivy {
+            name = "Node Distributions at ${extension.nodeDownloadBaseUrl}"
+            url = URI(extension.nodeDownloadBaseUrl)
 
-            repo.patternLayout {
-                it.artifact(extension.nodeDownloadPatternLayout)
+            patternLayout {
+                artifact(extension.nodeDownloadPatternLayout)
             }
-            repo.metadataSources { it.artifact() }
-            repo.content { it.includeModule("org.nodejs", "node") }
+            metadataSources { artifact() }
+            content { includeModule("org.nodejs", "node") }
         }
         val dep  = this.project.dependencies.create(extension.env.ivyDependency)
         val conf = this.project.configurations.detachedConfiguration(dep)
@@ -30,14 +30,14 @@ open class NodeJsSetupTask : DefaultTask() {
         when {
             result.name.endsWith("zip") -> {
                 project.copy {
-                    it.from(project.zipTree(result))
-                    it.into(resolve)
+                    from(project.zipTree(result))
+                    into(resolve)
                 }
             }
             else -> {
                 project.copy {
-                    it.from(project.tarTree(result))
-                    it.into(resolve)
+                    from(project.tarTree(result))
+                    into(resolve)
                 }
             }
         }
