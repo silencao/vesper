@@ -20,6 +20,5 @@ include("vesper-js-application")
 include("kotlin-getting-started")
 
 includeBuild("vesper-gradle-plugin")
-includeBuild("gradle-kts-initial-project")
 
 enableFeaturePreview("VERSION_CATALOGS")
