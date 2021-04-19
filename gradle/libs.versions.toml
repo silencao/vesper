@@ -1,0 +1,5 @@
+[versions]
+kotlin = "1.4.33
+
+[libraries]
+kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }

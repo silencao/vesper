@@ -1,6 +1,11 @@
 rootProject.name = "vesper"
+apply(from = "gradle/shared.repositories.settings.gradle.kts")
+
+// 构建插件
+includeBuild("vesper-gradle-plugin")
 // 示例模块
-include("vesper-spring-boot-demo:reactor-netty")
+include("vesper-demo:kotlin-getting-started")
+include("vesper-demo:reactor-netty")
 // 应用模块
 include("vesper-spring-boot-application:flux-server")
 include("vesper-spring-boot-application:hello-kotlin")
@@ -13,16 +18,6 @@ include("vesper-spring-boot-starter")
 // 测试模块
 include("vesper-spring-boot-test")
 // 其他模块
-include("vesper-gradle-plugin")
 include("vesper-js-application")
-include("kotlin-getting-started")
 
-includeBuild("gradle-kts-initial-project")
-
-dependencyResolutionManagement {
-    // 设置中心化管理，在build文件里定义远程仓库链接会输出警告
-    repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
-    repositories {
-        maven { url = uri("https://maven.aliyun.com/repository/public"       ) }
-    }
-}
+enableFeaturePreview("VERSION_CATALOGS")
