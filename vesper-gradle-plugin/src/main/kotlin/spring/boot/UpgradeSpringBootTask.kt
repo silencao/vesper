@@ -1,6 +1,6 @@
 package spring.boot
 
-import gradle.kotlin.dsl.accessors._e00424364118eb94b028be99e96b91cf.dependencyManagement
+import io.spring.gradle.dependencymanagement.dsl.DependencyManagementExtension
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.Internal
 import org.gradle.api.tasks.WriteProperties
@@ -19,13 +19,15 @@ open class UpgradeSpringBootTask : WriteProperties() {
         if (version == "")
             throw RuntimeException("未定义版本号！")
 
-        project.dependencyManagement.imports {
+        val dependencyManagement = project.extensions.getByType(DependencyManagementExtension::class.java)
+
+        dependencyManagement.imports {
             mavenBom("org.springframework.boot:spring-boot-dependencies:$version")
         }
 
         property("use.spring.boot.version", version)
         property("use.kotlin.version",
-            project.dependencyManagement.importedProperties
+            dependencyManagement.importedProperties
                 .get("kotlin.version") ?: KotlinVersion.CURRENT
         )
 

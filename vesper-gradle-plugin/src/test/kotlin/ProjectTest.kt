@@ -4,7 +4,7 @@ import org.gradle.util.GFileUtils
 import java.io.File
 import java.util.*
 
-class ProjectTest {
+internal class ProjectTest {
     companion object {
         fun project(
             clazz: Class<Any>,
