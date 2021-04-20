@@ -1,0 +1,6 @@
+### 浙江
+GET https://restapi.amap.com/v3/config/district?keywords=330000&key=531bb49d57108b57d5863b3a06304270&extensions=all
+### 杭州
+GET https://restapi.amap.com/v3/config/district?keywords=330100&key=531bb49d57108b57d5863b3a06304270&extensions=all
+### 上城区
+GET https://restapi.amap.com/v3/config/district?keywords=330102&key=531bb49d57108b57d5863b3a06304270&extensions=all
