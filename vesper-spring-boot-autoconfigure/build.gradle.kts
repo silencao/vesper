@@ -9,8 +9,3 @@ dependencies {
 
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
 }
-
-tasks.jar {
-    excludes
-        .add("META-INF/spring-configuration-metadata.json")
-}
