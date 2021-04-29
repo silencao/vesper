@@ -5,7 +5,6 @@ plugins {
     java
     eclipse
     id("my.project.spring-dependency-management")
-    id("my.project.test-conventions")
 }
 
 java {

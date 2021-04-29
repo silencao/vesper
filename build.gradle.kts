@@ -8,7 +8,7 @@ allprojects {
 }
 
 tasks.withType<spring.boot.UpgradeSpringBootTask> {
-    outputFile = projectDir.resolve("vesper-gradle-plugin/${Project.GRADLE_PROPERTIES}")
+    outputFile = projectDir.resolve("gradle-plugin/${Project.GRADLE_PROPERTIES}")
 }
 
 tasks.wrapper {

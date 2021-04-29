@@ -2,7 +2,7 @@ rootProject.name = "vesper"
 apply(from = "gradle/shared.repositories.settings.gradle.kts")
 
 // 构建插件
-includeBuild("vesper-gradle-plugin")
+includeBuild("gradle-plugin")
 // 示例模块
 include("vesper-demo:kotlin-getting-started")
 include("vesper-demo:reactor-netty")

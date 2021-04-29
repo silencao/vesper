@@ -1,7 +1,6 @@
 plugins {
     kotlin("jvm")
     eclipse
-    id("my.project.test-conventions")
 }
 
 dependencies {

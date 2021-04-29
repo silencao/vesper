@@ -2,25 +2,10 @@ plugins {
     `kotlin-dsl`
 }
 
-group = "com.github.silencao"
-version = "0.1"
-
-gradlePlugin {
-    plugins {
-        create("nodeJsPlugin") {
-            id = "my.project.nodejs.plugin"
-            implementationClass = "nodejs.NodeJsPlugin"
-        }
-    }
-}
-
 dependencies {
     val useKotlinVersion     = project.extra["use.kotlin.version"     ] as String
-    val useSpringBootVersion = project.extra["use.spring.boot.version"] as String
 
-    implementation(platform("org.springframework.boot:spring-boot-dependencies:$useSpringBootVersion"))
-    implementation("org.springframework.boot:spring-boot-gradle-plugin:$useSpringBootVersion")
-    implementation("io.spring.gradle:dependency-management-plugin")
+    implementation(project(":spring"))
     /**
      * kotlin项目构建必须依赖此插件
      * ps: kotlin("module-name") 引入当前gradle中kotlin对应版本的插件

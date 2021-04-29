@@ -1,3 +1,0 @@
-tasks.withType<Test> {
-    useJUnitPlatform()
-}
