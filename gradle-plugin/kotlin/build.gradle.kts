@@ -25,9 +25,4 @@ dependencies {
     implementation(kotlin("allopen"      , useKotlinVersion))
     implementation(kotlin("serialization", useKotlinVersion))
 
-    testImplementation(kotlin("test-testng", useKotlinVersion))
-}
-
-tasks.test {
-    useTestNG()
 }

@@ -1,13 +1,11 @@
 plugins {
-    `kotlin-dsl`
+    kotlin("jvm")
 }
 
 dependencies {
-    implementation(project(":javascript"))
-
     testImplementation(kotlin("test-testng"))
 }
 
-tasks.withType<Test> {
+tasks.test {
     useTestNG()
 }
