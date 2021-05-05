@@ -34,3 +34,5 @@ logs/
 
 **/resources/static/
 **/webapp/node_scripts/package/**
+
+local.properties

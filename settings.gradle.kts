@@ -4,6 +4,7 @@ apply(from = "gradle/shared.repositories.settings.gradle.kts")
 // 构建插件
 includeBuild("gradle-plugin")
 // 示例模块
+include("vesper-demo:flutter_app:android")
 include("vesper-demo:kotlin-getting-started")
 include("vesper-demo:reactor-netty")
 // 应用模块
