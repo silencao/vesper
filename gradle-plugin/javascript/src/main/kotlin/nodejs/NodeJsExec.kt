@@ -17,9 +17,6 @@ open class NodeJsExec : Exec() {
             return project.tasks.register(name, NodeJsExec::class.java) {
                 commandLine = listOf(env.nodeExecutable, "-h")
 
-                println(executable)
-                println(args)
-
                 configurationAction.execute(this)
             }
         }

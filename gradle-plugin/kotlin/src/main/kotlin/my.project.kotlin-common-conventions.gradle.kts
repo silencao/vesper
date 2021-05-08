@@ -1,5 +1,6 @@
 plugins {
     kotlin("jvm")
+    id("my.project.spring-dependency-management")
     eclipse
 }
 

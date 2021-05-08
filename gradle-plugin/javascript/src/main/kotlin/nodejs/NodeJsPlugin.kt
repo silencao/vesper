@@ -19,9 +19,6 @@ open class NodeJsPlugin : Plugin<Project> {
 
         tasks.register("hello") {
             group = TASKS_GROUP_NAME
-
-            println(nodeJsExtension.installationDir)
-            println(nodeJsExtension.nodeVersion)
         }
 
         tasks.register("kotlinNpmInstall") {
