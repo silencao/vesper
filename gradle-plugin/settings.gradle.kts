@@ -1,5 +1,8 @@
-rootProject.name = "gradle-plugin"
 apply(from = "../gradle/shared.repositories.settings.gradle.kts")
+
+pluginManagement {
+    includeBuild("../gradle-kit")
+}
 
 include("gradle"    )
 include("java"      )
