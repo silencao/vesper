@@ -2,6 +2,10 @@ plugins {
     `kotlin-dsl`
 }
 
+dependencies {
+    testImplementation(project(":gradle"))
+}
+
 gradlePlugin {
     plugins {
         create("nodeJsPlugin") {

@@ -2,16 +2,17 @@ import org.gradle.api.Project
 import org.gradle.testfixtures.ProjectBuilder
 import org.gradle.util.GFileUtils
 import java.io.File
+import java.net.URL
 import java.util.*
 
-internal class ProjectTest {
+class ProjectBuilder {
     companion object {
-        fun project(
+        fun create(
             clazz: Class<Any>,
             dirName: String = "${clazz.simpleName}_Resource"
         ): Project {
             return Optional.ofNullable(clazz.getResource("."))
-                .map { it.toURI() }
+                .map(URL::toURI)
                 .map { File(it).resolve(dirName) }
                 .map {
                     GFileUtils.mkdirs(it)
