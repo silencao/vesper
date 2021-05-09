@@ -1,5 +1,6 @@
-package nodejs
+package my.project.gradle.plugin.nodejs
 
+import my.project.gradle.plugin.task.registerExec
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.plugins.BasePlugin
@@ -13,13 +14,9 @@ open class NodeJsPlugin : Plugin<Project> {
             description = "Download and install a local node/npm version"
         }
 
-        val nodeJsExtension = project.extensions.create("nodeJs", NodeJsExtension::class.java, project)
-//        val rootClean = project.rootProject.tasks.named(BasePlugin.CLEAN_TASK_NAME)
-        val clean = project.tasks.named(BasePlugin.CLEAN_TASK_NAME)
+        project.extensions.create("nodeJs", NodeJsExtension::class.java, project)
 
-        tasks.register("hello") {
-            group = TASKS_GROUP_NAME
-        }
+        val clean = project.tasks.named(BasePlugin.CLEAN_TASK_NAME)
 
         tasks.register("kotlinNpmInstall") {
             dependsOn(setupTask)
@@ -29,9 +26,10 @@ open class NodeJsPlugin : Plugin<Project> {
             mustRunAfter(clean)
         }
 
-        NodeJsExec.create("nodeJsTest", nodeJsExtension) {
-            group = TASKS_GROUP_NAME
-        }
+        tasks.registerExec("node")
+        tasks.registerExec("npm" )
+        tasks.registerExec("npx" )
+
     }
 
     companion object {

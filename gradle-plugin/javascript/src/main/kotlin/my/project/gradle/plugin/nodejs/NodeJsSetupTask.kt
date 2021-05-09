@@ -1,4 +1,4 @@
-package nodejs
+package my.project.gradle.plugin.nodejs
 
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.TaskAction

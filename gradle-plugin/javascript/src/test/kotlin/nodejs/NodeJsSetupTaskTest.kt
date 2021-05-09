@@ -1,19 +1,18 @@
-package nodejs
-
-import ProjectBuilder
+import my.project.gradle.plugin.nodejs.NodeJsPlugin
+import my.project.gradle.plugin.nodejs.NodeJsSetupTask
 import kotlin.test.Test
 
 internal class NodeJsSetupTaskTest {
     @Test
     fun exec() {
-        val project = ProjectBuilder.create(this.javaClass, "nodeJs_plugin_test_project")
+        ProjectBuilder.create(this.javaClass, "nodeJs_plugin_test_project").run {
+            println(gradle.gradleUserHomeDir.absolutePath)
+            println(gradle.gradleHomeDir?.absoluteFile)
+            pluginManager.apply(NodeJsPlugin::class.java)
 
-        println(project.gradle.gradleUserHomeDir.absolutePath)
-        println(project.gradle.gradleHomeDir?.absoluteFile)
-        project.pluginManager.apply(NodeJsPlugin::class.java)
-
-        val extension = project.extensions.getByType(NodeJsExtension::class.java)
-        println(extension.env)
-//        project.tasks.named(NodeJsSetupTask.NAME, NodeJsSetupTask::class.java).get().exec()
+            val extension = NodeJsPlugin.ext(project)
+            println(extension.env)
+            tasks.named(NodeJsSetupTask.NAME, NodeJsSetupTask::class.java).get().exec()
+        }
     }
 }

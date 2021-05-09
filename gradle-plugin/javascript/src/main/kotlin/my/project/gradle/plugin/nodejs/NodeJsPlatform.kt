@@ -1,4 +1,4 @@
-package nodejs
+package my.project.gradle.plugin.nodejs
 
 internal object NodeJsPlatform {
     private val props = System.getProperties()

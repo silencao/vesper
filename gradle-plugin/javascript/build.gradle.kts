@@ -10,7 +10,7 @@ gradlePlugin {
     plugins {
         create("nodeJsPlugin") {
             id = "my.project.nodejs.plugin"
-            implementationClass = "nodejs.NodeJsPlugin"
+            implementationClass = "my.project.gradle.plugin.nodejs.NodeJsPlugin"
         }
     }
 }
