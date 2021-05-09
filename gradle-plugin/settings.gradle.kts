@@ -7,5 +7,5 @@ pluginManagement {
 include("gradle"    )
 include("java"      )
 include("javascript")
-include("kotlin"    )
+include("kotlin:jvm")
 include("spring"    )

@@ -1,5 +1,5 @@
 plugins {
-    id("my.project.kotlin-common-conventions")
+    id("my.project.kotlin-jvm-common")
     id("my.project.spring-boot-conventions")
     kotlin("plugin.spring")
 }
