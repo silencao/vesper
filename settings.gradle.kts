@@ -1,8 +1,8 @@
 apply(from = "gradle/shared.repositories.settings.gradle.kts")
 
 pluginManagement {
-    includeBuild("gradle-kit")
-    includeBuild("gradle-plugin")
+    includeBuild("./gradle-plugin")
+    includeBuild("./gradle-plugin/build-setup")
 }
 
 // 示例模块

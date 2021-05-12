@@ -1,4 +1,4 @@
-import my.project.gradle.kit.WrapperTask
+import my.project.gradle.plugin.task.WrapperTask
 
 tasks.replace("wrapper", WrapperTask::class).apply {
     doFirst {

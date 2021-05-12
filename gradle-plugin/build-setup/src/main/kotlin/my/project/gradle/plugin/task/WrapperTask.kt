@@ -1,4 +1,4 @@
-package my.project.gradle.kit
+package my.project.gradle.plugin.task
 
 import org.gradle.api.Action
 import org.gradle.api.Task
