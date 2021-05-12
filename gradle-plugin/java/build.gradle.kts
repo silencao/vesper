@@ -1,5 +1,5 @@
 plugins {
-    `kotlin-dsl`
+    id("my.project.kotlin-dsl")
 }
 
 dependencies {
