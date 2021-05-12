@@ -1,6 +1,5 @@
 plugins {
-    id("my.project.custom-wrapper")
-    id("my.project.spring-boot-upgrade-plugin")
+    id("my.project.build-setup")
 }
 
 allprojects {
@@ -8,6 +7,6 @@ allprojects {
     version = "0.0.5"
 }
 
-tasks.withType<spring.boot.UpgradeSpringBootTask> {
-    outputFile = projectDir.resolve("gradle-plugin/${Project.GRADLE_PROPERTIES}")
+tasks.withType<my.project.gradle.plugin.task.UpgradeTask> {
+    outputDir = "gradle-plugin"
 }
