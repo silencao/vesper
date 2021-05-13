@@ -1,6 +1,5 @@
 plugins {
     id("my.project.kotlin-jvm-application")
-    id("my.project.kotlin-plugin-serialization")
 }
 
 application {
@@ -8,5 +7,4 @@ application {
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.1.0")
 }
