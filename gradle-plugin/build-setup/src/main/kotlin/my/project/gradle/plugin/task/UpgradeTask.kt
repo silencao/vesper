@@ -1,6 +1,7 @@
 package my.project.gradle.plugin.task
 
 import io.spring.gradle.dependencymanagement.dsl.DependencyManagementExtension
+import my.project.gradle.plugin.BuildSetup
 import org.gradle.api.Project
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.Internal
@@ -16,7 +17,7 @@ open class UpgradeTask : WriteProperties() {
     var outputDir: String = ""
 
     @Internal
-    override fun getGroup(): String { return "build setup" }
+    override fun getGroup(): String { return BuildSetup.group }
     override fun writeProperties() {
         lineSeparator = System.lineSeparator()
 
