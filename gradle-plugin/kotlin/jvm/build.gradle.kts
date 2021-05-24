@@ -23,6 +23,5 @@ dependencies {
      * )
      */
     implementation(kotlin("allopen"      , use_kotlin_version))
-    implementation(kotlin("serialization", use_kotlin_version))
 
 }

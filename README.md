@@ -2,7 +2,7 @@
 vesper, 整合vue+spring全家桶，主要包含：
 
 - 【前端】vue 3.x, vue-cli 4.x, vite
-- 【后端】spring 5.x, springboot 2.4.x
+- 【后端】spring 5.x, springboot 2.5.x
 - 【构建】gradle 6.x with Kotlin-DSL
 
 网上gradle的资料很少，本项目将探索gradle项目最佳实践，已实现的特性
