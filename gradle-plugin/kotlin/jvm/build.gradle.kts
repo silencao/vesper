@@ -22,6 +22,6 @@ dependencies {
      *     version = "1.4.21"
      * )
      */
-    implementation(kotlin("allopen"      , use_kotlin_version))
+    runtimeOnly(kotlin("allopen"      , use_kotlin_version))
 
 }
