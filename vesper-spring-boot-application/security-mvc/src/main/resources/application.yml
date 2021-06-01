@@ -3,7 +3,7 @@ server:
   error:
     path: /hasError
 
-logging.level.org.springframework: trace
+#logging.level.org.springframework: trace
 logging.logback.rollingpolicy:
   max-history: 1
   max-file-size: 256KB

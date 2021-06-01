@@ -1,16 +1,16 @@
 package im.silen.securitymvc;
 
 import im.silen.vesper.lib.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.web.ServerProperties;
-import org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController;
-import org.springframework.boot.autoconfigure.web.servlet.error.ErrorViewResolver;
-import org.springframework.boot.web.servlet.error.ErrorAttributes;
-import org.springframework.boot.web.servlet.error.ErrorController;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.Bean;
-import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationEventPublisher;
+import org.springframework.security.authentication.DefaultAuthenticationEventPublisher;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -18,17 +18,14 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.Optional;
 import java.util.stream.IntStream;
 
 @SpringBootApplication
@@ -40,7 +37,7 @@ public class SecurityMvcApplication {
         @GetMapping("/hello") String hello(@AuthenticationPrincipal UserDetails user) {
             return "hello " + user.getUsername() + "!";
         }
-        @GetMapping("/entity") String entity() {
+        @PostMapping("/entity") String entity() {
             return JSONObject.stringify(ResponseEntity.status(401)
                     .header("x-custom", "test")
                     .body(LocalDateTime.now()));
@@ -50,47 +47,72 @@ public class SecurityMvcApplication {
         }
     }
 
-    @Bean
-    public ErrorController errorController(ErrorAttributes errorAttributes, ServerProperties serverProperties, List<ErrorViewResolver> errorViewResolvers) {
-
-        return new BasicErrorController(errorAttributes, serverProperties.getError(), errorViewResolvers) {
-            @Override
-            public ResponseEntity<Map<String, Object>> error(HttpServletRequest request) {
-                return ResponseEntity.status(getStatus(request)).body(Collections.singletonMap("now", LocalDateTime.now()));
-            }
-
-            @Override
-            @RequestMapping("/*.html")
-            public ModelAndView errorHtml(HttpServletRequest request, HttpServletResponse response) {
-                return super.errorHtml(request, response);
-            }
-
-            @GetMapping("/t1/{id}")
-            public Object returnID(@PathVariable int id) {
-                return ResponseEntity.ok(String.format("%d", id));
-            }
-        };
-    }
-
     @EnableWebSecurity
     static class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+        private final Logger logger = LoggerFactory.getLogger(SecurityConfiguration.class);
+        private static class ResponseError {
+            private int status;
+            private String message;
+            private LocalDateTime timestamp = LocalDateTime.now();
+
+            public ResponseError(int status, String message) {
+                this.status = status;
+                this.message = message;
+            }
+            public int getStatus() { return status;}
+            public String getMessage() { return message;}
+            public LocalDateTime getTimestamp() { return timestamp;}
+        }
+
+        @Bean
+        public AuthenticationEventPublisher authenticationEventPublisher
+                (ApplicationEventPublisher applicationEventPublisher) {
+            return new DefaultAuthenticationEventPublisher(applicationEventPublisher);
+        }
+
         @Override
         protected void configure(HttpSecurity http) throws Exception {
-            http.authorizeRequests().antMatchers("/").anonymous()
+
+            http.authorizeRequests()
+                    .antMatchers("/").anonymous()
+
                     .antMatchers("/hasError/**").permitAll()
                     .antMatchers("**").authenticated();
-            http.exceptionHandling().authenticationEntryPoint((request, response, authException) -> {
-                response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "需要登录");
-//                response.getWriter().append(JSONObject.stringify(Collections.singletonMap("now", LocalDateTime.now())));
-//                容器会自动关闭
-//                response.getWriter().flush();
-//                response.getWriter().close();
-            });
+
+            http.exceptionHandling()
+                    .accessDeniedHandler((request, response, accessDeniedException) -> {
+                        sendError(HttpServletResponse.SC_BAD_REQUEST, "访问受限",
+                                request, response, accessDeniedException);
+                    })
+                    .authenticationEntryPoint((request, response, authException) -> {
+                        /* 配置后http.formLogin().loginPage()失效，已知以下几种可能的异常
+                         * 1 org.springframework.security.authentication.InsufficientAuthenticationException: Full authentication is required to access this resource */
+                        sendError(HttpServletResponse.SC_UNAUTHORIZED, "需要登录",
+                                request, response, authException);
+                    })
+            ;
+
+//            http.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
             http.formLogin()
-//                     .loginPage         (/*GET , 默认值*/"/login")
-//                     .loginProcessingUrl(/*POST, 默认值*/"/login")
-                    .failureHandler((request, response, exception) -> response.sendError(HttpStatus.UNAUTHORIZED.value(), exception.getMessage()));
-            http.headers().cacheControl();
+                    .failureHandler((request, response, exception) -> {
+                        sendError(HttpServletResponse.SC_BAD_REQUEST, "登录失败",
+                                request, response, exception);
+                    })
+                    .successHandler((request, response, authentication) -> {
+                        response.getWriter().println(authentication);
+                    })
+                    .loginProcessingUrl(/*POST, 默认值*/"/login");
+//            http.headers().cacheControl();
+        }
+
+        private void sendError(int status, String desc, HttpServletRequest request, HttpServletResponse response, Exception exception) throws IOException {
+            logger.info("{} SessionId: {} URI: {}, msg: {}", desc, Optional.ofNullable(request.getRequestedSessionId())
+                    .map(id -> id.substring(0, 8) + "...")
+                    .orElse("暂未获取,"), request.getRequestURI(), exception.getMessage());
+
+            response.setContentType(MediaType.APPLICATION_JSON_VALUE);
+            response.setStatus(status);
+            response.getWriter().println(JSONObject.stringify(new ResponseError(status, exception.getMessage())));
         }
 
         @Override

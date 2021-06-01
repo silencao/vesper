@@ -1,0 +1,16 @@
+// @no-log
+// @no-redirect
+// @no-cookie-jar
+POST http://localhost:8080/api/entity
+X-XSRF-TOKEN: 34
+Cookie: JSESSIONID=92193BB10424D2E3F136BED5658D3E82; XSRF-TOKEN=3;
+###
+// @no-log
+// @no-redirect
+// @no-cookie-jar
+POST http://localhost:8080/api/login
+Content-Type: application/x-www-form-urlencoded
+X-XSRF-TOKEN: da
+Cookie: XSRF-TOKEN=da;
+
+username=admin&password=123
