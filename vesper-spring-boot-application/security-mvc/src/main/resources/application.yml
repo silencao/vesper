@@ -10,4 +10,7 @@ logging.logback.rollingpolicy:
   clean-history-on-start: true
 vesper:
   json-format:
-    local-date-time: yyyy-MM-dd HH:mm:ss
+    local-date-time: yyyy-MM-dd'T'HH:mm:ss
+spring:
+  jackson:
+    default-property-inclusion: non_null

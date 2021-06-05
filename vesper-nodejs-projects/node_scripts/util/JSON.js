@@ -17,6 +17,18 @@ function stringify(list, replacer, spaces = 2) {
         '\n]'
 }
 
-module.exports = {
+export const JSONArray = {
     stringify
+}
+
+export const JSONObject = {
+    stringify(obj) {
+        const maxLength = Object.keys(obj).map(k => k.length).reduce((l, r) => l > r ? l : r);
+        const entries = Object.entries(obj);
+        return ('{\n' +
+            entries.map(function ([type, item]) {
+                return `    ${(`"${type}"`).padStart(maxLength + 2)}: ${JSON.stringify(item)}`
+            }).join(',\n') +
+        '\n}');
+    }
 }
