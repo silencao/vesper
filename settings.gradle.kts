@@ -6,7 +6,6 @@ pluginManagement {
 }
 
 // 示例模块
-include("vesper-demo:hello-kotlin-js")
 include("vesper-demo:kotlin-getting-started")
 include("vesper-demo:reactor-netty")
 // 应用模块
