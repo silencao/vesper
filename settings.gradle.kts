@@ -1,8 +1,8 @@
-apply(from = "gradle/shared.repositories.settings.gradle.kts")
-
 pluginManagement {
-    includeBuild("./gradle-plugin")
-    includeBuild("./gradle-plugin/build-setup")
+    apply(rootDir
+        .resolve("gradle"     ).apply { includeBuild(absolutePath) }
+        .resolve("build-setup").apply { includeBuild(absolutePath) }
+        .resolve("settings.gradle.kts"))
 }
 
 // 示例模块

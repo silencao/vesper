@@ -1,6 +1,5 @@
 import my.project.gradle.plugin.BuildSetup
 import my.project.gradle.plugin.task.WrapperTask
-import org.gradle.util.GradleVersion
 
 
 tasks.replace("wrapper", WrapperTask::class).apply {

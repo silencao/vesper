@@ -8,5 +8,5 @@ allprojects {
 }
 
 tasks.withType<my.project.gradle.plugin.task.UpgradeTask> {
-    outputDir = "gradle-plugin"
+    outputDir = "gradle"
 }
